@@ -22,13 +22,13 @@ function Saldo() {
       <BasicCards
         info="17.400,00"
         name="Entradas"
-        color={Theme.palette.secondary.grayTwo}
+        color={Theme.palette.primary.main}
         Icon={ArrowCircleUp}
       />
       <BasicCards
         info="1.259,00"
         name="Saidas"
-        color={Theme.palette.primary.negative}
+        color={"red"}
         Icon={ArrowCircleDown}
       />
       <BasicCards
