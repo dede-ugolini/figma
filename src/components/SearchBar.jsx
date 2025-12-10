@@ -1,4 +1,4 @@
-import { Stack, Button, Box, TextField, Typography } from '@mui/material'
+import { Stack, Button, Box, } from '@mui/material'
 import { Theme } from '../themes/Theme';
 import { MyTextField } from './MyTextField';
 import SearchIcon from '@mui/icons-material/Search';
@@ -34,11 +34,11 @@ function SearchBar() {
               },
               border: 'none'
             }}
-          ><SearchIcon></SearchIcon>  Buscar</Button>
+          ><SearchIcon></SearchIcon>Buscar</Button>
         </Box>
 
       </Stack>
-      ;    </>
+    </>
   );
 }
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
 import { MyTextField } from "./MyTextField";
 
-function NewTransection() {
+function NewTransection({ onAddTransaction }) {
   const [open, setOpen] = useState(false);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -19,8 +19,9 @@ function NewTransection() {
     setOpen(false);
   }
 
+
   function register() {
-    const newTransection = {
+    const newTransaction = {
       description,
       price: Number(price),
       category,
@@ -28,7 +29,10 @@ function NewTransection() {
       date: new Date().toISOString
     };
 
-    console.log("Registrando:", newTransection);
+    console.log("Registrando:", newTransaction);
+
+    // Enviando o objeto de transação para o componente que me chamou.
+    onAddTransaction(newTransaction)
 
     //Limpando os campos
     setDescription("");
