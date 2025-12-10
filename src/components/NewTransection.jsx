@@ -1,17 +1,42 @@
-import { Button, Dialog, Card, Stack } from "@mui/material";
+import { Button, Dialog, Stack } from "@mui/material";
 import { Theme } from "../themes/Theme";
 import { useState } from "react";
-import { ArrowCircleUp, ArrowCircleDown, BorderColor } from "@mui/icons-material";
+import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
 import { MyTextField } from "./MyTextField";
 
 function NewTransection() {
   const [open, setOpen] = useState(false);
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("entrada");
 
   function clickToOpen() {
     setOpen(true);
   }
 
   function clickToClose() {
+    setOpen(false);
+  }
+
+  function register() {
+    const newTransection = {
+      description,
+      price: Number(price),
+      category,
+      type,
+      date: new Date().toISOString
+    };
+
+    console.log("Registrando:", newTransection);
+
+    //Limpando os campos
+    setDescription("");
+    setPrice("");
+    setCategory("");
+    setType("");
+
+    // Fecha o dialog
     setOpen(false);
   }
   return (
@@ -50,31 +75,46 @@ function NewTransection() {
             <h4>Nova Transação</h4>
 
             <MyTextField // Primeiro textfield
-              label={"Descrição"}></MyTextField>
+              label={"Descrição"}
+              value={description}
+              setInputValue={setDescription}
+            ></MyTextField>
 
-            <MyTextField label={"Preço"}></MyTextField>
+            <MyTextField
+              label={"Preço"}
+              value={price}
+              setInputValue={setPrice}
+            ></MyTextField>
 
-            <MyTextField label={"Categoria"}></MyTextField>
+            <MyTextField
+              label={"Categoria"}
+              value={category}
+              setInputValue={setCategory}
+            ></MyTextField>
 
             <Stack spacing={1} direction={'row'} sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Button sx={{
-                borderRadius: "6px",
-                backgroundColor: Theme.palette.secondary.light,
-                color: Theme.palette.primary.contrastText,
-              }}><ArrowCircleUp color="success"></ArrowCircleUp>Entrada</Button>
+              <Button
+                onClick={() => setType("entrada")}
+                sx={{
+                  borderRadius: "6px",
+                  backgroundColor: Theme.palette.secondary.light,
+                  color: Theme.palette.primary.contrastText,
+                }}><ArrowCircleUp color="success"></ArrowCircleUp>Entrada</Button>
 
-              <Button sx={{
-                borderRadius: "6px",
-                backgroundColor: Theme.palette.secondary.light,
-                color: Theme.palette.primary.contrastText,
-              }}><ArrowCircleDown color="error"></ArrowCircleDown>Saída</Button>
+              <Button
+                onClick={() => setType("saida")}
+                sx={{
+                  borderRadius: "6px",
+                  backgroundColor: Theme.palette.secondary.light,
+                  color: Theme.palette.primary.contrastText,
+                }}><ArrowCircleDown color="error"></ArrowCircleDown>Saída</Button>
             </Stack>
 
-            <Button variant="contained" sx={{
+            <Button onClick={register} variant="contained" sx={{
               backgroundColor: Theme.palette.primary.light,
             }}>Cadastrar</Button>
           </Stack>
