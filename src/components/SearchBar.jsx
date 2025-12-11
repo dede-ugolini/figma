@@ -2,7 +2,8 @@ import { Stack, Button, Box, } from '@mui/material'
 import { Theme } from '../themes/Theme';
 import { MyTextField } from './MyTextField';
 import SearchIcon from '@mui/icons-material/Search';
-function SearchBar() {
+
+function SearchBar({ search, setSearch }) {
 
   return (
 
@@ -14,7 +15,11 @@ function SearchBar() {
         <Box sx={{
           width: "70%"
         }}>
-          <MyTextField label={"Busque uma Transação"} />
+          <MyTextField
+            label={"Busque uma Transação"}
+            inputValue={search}
+            setInputValue={setSearch}
+          />
         </Box>
         <Box sx={{
           width: "30%"
