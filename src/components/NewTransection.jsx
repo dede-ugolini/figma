@@ -26,7 +26,7 @@ function NewTransection({ onAddTransaction }) {
       price: Number(price),
       category,
       type,
-      date: new Date().toISOString
+      date: new Date().toDateString(),
     };
 
     console.log("Registrando:", newTransaction);

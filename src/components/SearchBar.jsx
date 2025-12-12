@@ -10,9 +10,9 @@ function SearchBar({ search, setSearch }) {
     <>
       <Stack direction='collumn' sx={{
         width: "100%",
-        height: "100px"
+        height: "40px"
       }}>
-        <Box sx={{
+        <Stack sx={{
           width: "70%"
         }}>
           <MyTextField
@@ -20,8 +20,8 @@ function SearchBar({ search, setSearch }) {
             inputValue={search}
             setInputValue={setSearch}
           />
-        </Box>
-        <Box sx={{
+        </Stack>
+        <Stack sx={{
           width: "30%"
         }}>
           <Button
@@ -40,7 +40,7 @@ function SearchBar({ search, setSearch }) {
               border: 'none'
             }}
           ><SearchIcon></SearchIcon>Buscar</Button>
-        </Box>
+        </Stack>
 
       </Stack>
     </>
