@@ -1,4 +1,4 @@
-import { Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 function Transactions({ transactions }) {
   return (
