@@ -65,7 +65,7 @@ function NewTransection({ onAddTransaction }) {
         slotProps={{
           root: {
             sx: {
-              backgroundColor: "transparent",
+              backgroundColor: Theme.palette.background.body,
             }
           }
         }}
