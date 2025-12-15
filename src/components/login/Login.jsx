@@ -3,11 +3,11 @@ import { Navigate } from 'react-router-dom';
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from 'react'
 
-import { Theme } from '../themes/Theme.jsx'
-import { MyTextField } from './MyTextField.jsx'
+import { Theme } from '../../themes/Theme.jsx'
+import { MyTextField } from '../MyTextField.jsx'
 import Register from './Register.jsx'
 
-import loginApi from '../api/login.json'
+import loginApi from '../../api/login.json'
 
 //TODO: Implementar proteção de rota, para que usuário que não esteja logado não consiga acessar Main
 //TODO: Estilizar a pagina de login porque está horrível de feia
