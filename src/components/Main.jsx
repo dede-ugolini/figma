@@ -3,7 +3,7 @@ import { Stack, Box } from '@mui/material'
 
 import Header from './Header.jsx'
 import Saldo from './Saldo.jsx'
-import TransactionContainer from './TransactionsContainer.jsx'
+import TransactionContainer from './transactions/TransactionsContainer.jsx'
 
 export default function Main() {
 
@@ -32,7 +32,6 @@ export default function Main() {
           alignItems: "center",
           width: '80%'
         }}>
-          <Saldo />
           <TransactionContainer />
         </Stack>
 

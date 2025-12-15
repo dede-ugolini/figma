@@ -1,6 +1,6 @@
 import { Stack, Button, Box, } from '@mui/material'
-import { Theme } from '../themes/Theme';
-import { MyTextField } from './MyTextField';
+import { Theme } from '../../themes/Theme';
+import { MyTextField } from '../MyTextField';
 import SearchIcon from '@mui/icons-material/Search';
 
 function SearchBar({ search, setSearch }) {

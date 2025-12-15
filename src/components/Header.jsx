@@ -1,7 +1,7 @@
 import { Theme } from "../themes/Theme";
 import { Box, Stack } from "@mui/material";
 import NomeEmpresa from "./NomeEmpresa";
-import NewTransection from "./NewTransection";
+import NewTransection from "./transactions/NewTransection";
 
 function Header() {
   return (

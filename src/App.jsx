@@ -1,6 +1,6 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import Login from './components/Login.jsx'
+import Login from './components/login/Login.jsx'
 import Main from './components/Main.jsx'
 
 function App() {
