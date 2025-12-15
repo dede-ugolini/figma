@@ -1,10 +1,11 @@
 import { Button, Dialog, Stack } from "@mui/material";
-import { Theme } from "../themes/Theme";
+import { Theme } from "../../themes/Theme";
 import { useState } from "react";
 import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
-import { MyTextField } from "./MyTextField";
+import { MyTextField } from "../MyTextField";
 
-function NewTransection({ onAddTransaction }) {
+function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
+
   const [open, setOpen] = useState(false);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -21,13 +22,26 @@ function NewTransection({ onAddTransaction }) {
 
 
   function register() {
+    const data = new Date();
+    const day = String(data.getDate());
+    const month = String(data.getMonth() + 1);
+    const year = String(data.getFullYear());
+    const fomarmatedDate = `${day}/${month}/${year}`;
+
     const newTransaction = {
       description,
       price: Number(price),
       category,
       type,
-      date: new Date().toDateString(),
+      date: fomarmatedDate,
     };
+
+    if (newTransaction.type === 'entrada') {
+      setValueEntrada(prev => prev + price);
+    }
+    else {
+      setValueSaida(prev => prev + price);
+    }
 
     console.log("Registrando:", newTransaction);
 
@@ -78,19 +92,19 @@ function NewTransection({ onAddTransaction }) {
           }}>
             <h4>Nova Transação</h4>
 
-            <MyTextField // Primeiro textfield
+            <MyTextField // Textfield que coleta o input de descrição
               label={"Descrição"}
               value={description}
               setInputValue={setDescription}
             ></MyTextField>
 
-            <MyTextField
+            <MyTextField // Textfield que coleta o input do preço
               label={"Preço"}
               value={price}
               setInputValue={setPrice}
             ></MyTextField>
 
-            <MyTextField
+            <MyTextField // Textfield que colea o input da categoria
               label={"Categoria"}
               value={category}
               setInputValue={setCategory}
@@ -101,7 +115,7 @@ function NewTransection({ onAddTransaction }) {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <Button
+              <Button // Botão que define se transação é do tipo entrada
                 onClick={() => setType("entrada")}
                 sx={{
                   borderRadius: "6px",
@@ -109,7 +123,7 @@ function NewTransection({ onAddTransaction }) {
                   color: Theme.palette.primary.contrastText,
                 }}><ArrowCircleUp color="success"></ArrowCircleUp>Entrada</Button>
 
-              <Button
+              <Button // Botão que define se transação é do tipo saída 
                 onClick={() => setType("saida")}
                 sx={{
                   borderRadius: "6px",
@@ -118,9 +132,10 @@ function NewTransection({ onAddTransaction }) {
                 }}><ArrowCircleDown color="error"></ArrowCircleDown>Saída</Button>
             </Stack>
 
-            <Button onClick={register} variant="contained" sx={{
-              backgroundColor: Theme.palette.primary.light,
-            }}>Cadastrar</Button>
+            <Button // Botão que cadatra nova transação
+              onClick={register} variant="contained" sx={{
+                backgroundColor: Theme.palette.primary.light,
+              }}>Cadastrar</Button>
           </Stack>
 
         </Stack>
