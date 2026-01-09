@@ -1,5 +1,6 @@
 import { Stack, Button, Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { useState } from 'react'
+import { Theme } from '../../themes/Theme.jsx'
 
 export default function Register({ loginData, onRegister }) {
 
@@ -34,7 +35,14 @@ export default function Register({ loginData, onRegister }) {
 
   return (
     <>
-      <Button onClick={handleClickOpen}>Cadastrar</Button>
+      <Button onClick={handleClickOpen} sx={{
+        color: Theme.palette.primary.contrastText,
+        backgroundColor: Theme.palette.primary.dark,
+        ":hover": {
+          backgroundColor: Theme.palette.primary.main
+        }
+
+      }}>Cadastrar</Button>
       <Dialog open={open} onClose={handleClickClose}>
         <Stack spacing={2} sx={{
           margin: "20px",

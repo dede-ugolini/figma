@@ -4,13 +4,11 @@ import { Button, Stack, TextField } from "@mui/material";
 import { useState } from 'react'
 
 import { Theme } from '../../themes/Theme.jsx'
-import { MyTextField } from '../MyTextField.jsx'
 import Register from './Register.jsx'
 
 import loginApi from '../../api/login.json'
 
 //TODO: Implementar proteção de rota, para que usuário que não esteja logado não consiga acessar Main
-//TODO: Estilizar a pagina de login porque está horrível de feia
 
 export default function Login() {
 
@@ -43,41 +41,101 @@ export default function Login() {
   return (
     <Stack sx={{
       width: '100%',
+      height: '80vh',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       color: Theme.palette.primary.contrastText,
     }}
     >
-      <Stack sx={{
+      <Stack spacing={2} sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
       }}>
         <Stack>
-          <h3>Login</h3>
+          <h1>Login</h1>
         </Stack>
-
-        <MyTextField // Text field que coleta input do nome de usuário
-          label={'Digite o nome de usuário'}
-          inputValue={user}
-          setInputValue={setUser}
+        { /*Para aprender de vez: 
+          Componentes não herdam props, apenas CSS, então se eu fazer <Stack spacing={2}><Stack>Está Stack não herda spacing 2</Stack></Stack>
+          Então se eu declarar na primeira Stack color: primary.main todos os componentes filhos devem herdar? Nem sempre
+          Alguns componentes como TextField não herda porque é um componente composto por outros componentes como FormControl, InputLabel,OutlinedInput/InputBase
+          Cada parte tem seu estilo próprio, com cores definidas internamente pelo tema, então para mudar a cor do texto do input precisamos fazer essa coisa horrosa mesmo
+         '& .MuiInputBase-input': {
+           color: Theme.palette.primary.contrastText,
+         }
+        */
+        }
+        <TextField
+          label={"Digite o nome de usuário"}
+          onChange={(e) => setUser(e.target.value)}
+          sx={{
+            backgroundColor: Theme.palette.secondary.light,
+            borderRadius: "10px",
+            '& .MuiInputBase-input': { // Cor do texto de input do usuário
+              color: Theme.palette.primary.contrastText,
+            },
+            '& .MuiInputLabel-root': { // Cor do label do TextField
+              color: Theme.palette.primary.contrastText,
+            },
+            '& .MuiOutlinedInput-root': {
+              '&:hover fieldset': {
+                borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+              },
+            },
+          }}
         >
-        </MyTextField>
+        </TextField>
 
         <TextField // Text field que coleta input de senha do usuario
           label={"Digite a senha do usuario"}
           type='password'
-          onChange={(e) => setPassword(e.target.value)}>
+          onChange={(e) => setPassword(e.target.value)}
+          sx={{
+            color: "secondary.main",
+            backgroundColor: Theme.palette.secondary.light,
+            borderRadius: "10px",
+            '& .MuiInputBase-input': { // Cor do texto de input do usuário
+              color: Theme.palette.primary.contrastText,
+            },
+            '& .MuiInputLabel-root': { // Cor do label do TextField
+              color: Theme.palette.primary.contrastText,
+            },
+            '& .MuiOutlinedInput-root': {
+              '&:hover fieldset': {
+                borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+              },
+            },
+          }}
+        >
         </TextField>
 
-        <Button // Botão para entrar
-          onClick={verify}>
-          Entrar
-        </Button>
+        <Stack spacing={2} direction={'row'} sx={{
+        }}>
+          <Button // Botão para entrar
+            onClick={verify}
+            sx={{
+              color: Theme.palette.primary.contrastText,
+              backgroundColor: Theme.palette.primary.dark,
+              '&:hover': {
+                backgroundColor: Theme.palette.primary.main
+              }
+            }}
+          >
+            Entrar
+          </Button>
 
-        <Register // Botão para registrar novo usuário
-          loginData={loginData} onRegister={handleRegister} />
+          <Register // Botão para registrar novo usuário
+
+            loginData={loginData} onRegister={handleRegister}
+          />
+        </Stack>
       </Stack>
     </Stack>
   )
