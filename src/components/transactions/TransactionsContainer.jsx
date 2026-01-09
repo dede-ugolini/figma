@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NewTransection from "../NewTransection";
+import NewTransection from "./NewTransection";
 import Transactions from "./Transactions";
 import SearchBar from "./SearchBar";
 
