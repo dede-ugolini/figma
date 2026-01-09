@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField, Alert, AlertTitle, Snackbar } from "@mui/material";
 import { useState } from 'react'
 
 import { Theme } from '../../themes/Theme.jsx'
@@ -15,6 +15,8 @@ export default function Login() {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [logged, setLogged] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [loginData, setLogin] = useState([...loginApi]);
 
@@ -22,11 +24,18 @@ export default function Login() {
     const validUser = loginApi.find(index => index.login === user && index.senha === password);
     if (validUser) {
       console.log("Você está logado.");
-      setLogged(true);
+      setOpen(true);
+      setSuccess(true);
+      setTimeout(() => {
+        setLogged(true);
+      }, 1000);
+
     }
     else {
       console.log("Usuário ou senha errados, digite novamente.");
       setLogged(false);
+      setOpen(true);
+      setSuccess(false);
     }
   };
 
@@ -137,6 +146,28 @@ export default function Login() {
           />
         </Stack>
       </Stack>
+
+      <Snackbar // Snackbar em caso de falha de login
+        open={open && !success}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert variant='filled' severity='error' onClose={() => setOpen(false)}>
+          <AlertTitle>Atenção!</AlertTitle>
+          Usuário ou senha inválidos!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar // Snackbar em caso de sucesso de login
+        open={open && success}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert variant='filled' severity='success' onClose={() => setOpen(false)}>
+          <AlertTitle>Bem vindo!</AlertTitle>
+          Login bem sucedido!
+        </Alert>
+      </Snackbar>
     </Stack>
   )
 
