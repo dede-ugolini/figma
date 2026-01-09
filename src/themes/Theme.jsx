@@ -9,14 +9,14 @@ export const Theme = createTheme({
       contrastText: "#fff",
     },
     secondary: {
-      light: "#2D2D2E",
-      main: "#121214",
-      grayTwo: "#202024",
-      grayThree: "#29292E",
+      light: "#2D2D2E", // gray
+      main: "#121214", // black
+      grayTwo: "#202024", // bold gray
+      grayThree: "#29292E", // middle gray
       contrastText: "#fff",
     },
     background: {
-      body: "#202024",
+      body: "#202024", // bold gray
       header: "#141416"
     },
   },
