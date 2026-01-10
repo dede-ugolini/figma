@@ -107,7 +107,7 @@ export default function Login() {
                 borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
               },
             },
-            input: { color: Theme.palette.primary.contrastText } // Aparentemente ao focar no TextField a cor do label não fica mais aquele azul padrão do MUI
+            input: { color: "" } // Aparentemente ao focar no TextField a cor do label não fica mais aquele azul padrão do MUI
           }}
         >
         </TextField>
@@ -135,7 +135,7 @@ export default function Login() {
                 borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
               },
             },
-            input: { color: Theme.palette.primary.contrastText }
+            input: { color: "" }
           }}
         >
         </TextField>
