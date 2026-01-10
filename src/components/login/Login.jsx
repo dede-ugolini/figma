@@ -107,6 +107,7 @@ export default function Login() {
                 borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
               },
             },
+            input: { color: Theme.palette.primary.contrastText } // Aparentemente ao focar no TextField a cor do label não fica mais aquele azul padrão do MUI
           }}
         >
         </TextField>
@@ -134,6 +135,7 @@ export default function Login() {
                 borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
               },
             },
+            input: { color: Theme.palette.primary.contrastText }
           }}
         >
         </TextField>
@@ -164,10 +166,14 @@ export default function Login() {
         open={open && !success}
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
       >
         <Alert variant='filled' severity='error' onClose={() => setOpen(false)}>
           <AlertTitle>Atenção!</AlertTitle>
-          Usuário ou senha inválidos!
+          {message}
         </Alert>
       </Snackbar>
 
@@ -175,6 +181,10 @@ export default function Login() {
         open={open && success}
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
       >
         <Alert variant='filled' severity='success' onClose={() => setOpen(false)}>
           <AlertTitle>Bem vindo!</AlertTitle>
