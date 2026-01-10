@@ -17,13 +17,24 @@ export default function Login() {
   const [logged, setLogged] = useState(false);
   const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState('');
 
   const [loginData, setLogin] = useState([...loginApi]);
 
   const verify = () => {
+
+    if (user.length === 0 || password.length === 0) {
+      console.log("Não é permitido user ou password vazio");
+      setMessage("Não é permitido usuário nem senha vazios");
+      setOpen(true);
+      setSuccess(false);
+      return;
+    }
+
     const validUser = loginApi.find(index => index.login === user && index.senha === password);
     if (validUser) {
       console.log("Você está logado.");
+      setMessage("Login bem sucedido!")
       setOpen(true);
       setSuccess(true);
       setTimeout(() => {
@@ -33,6 +44,7 @@ export default function Login() {
     }
     else {
       console.log("Usuário ou senha errados, digite novamente.");
+      setMessage("Usuário ou senha inválidos")
       setLogged(false);
       setOpen(true);
       setSuccess(false);
@@ -102,6 +114,7 @@ export default function Login() {
         <TextField // Text field que coleta input de senha do usuario
           label={"Digite a senha do usuario"}
           type='password'
+          // required={true}
           onChange={(e) => setPassword(e.target.value)}
           sx={{
             color: "secondary.main",
@@ -165,7 +178,7 @@ export default function Login() {
       >
         <Alert variant='filled' severity='success' onClose={() => setOpen(false)}>
           <AlertTitle>Bem vindo!</AlertTitle>
-          Login bem sucedido!
+          {message}
         </Alert>
       </Snackbar>
     </Stack>
