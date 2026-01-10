@@ -1,12 +1,11 @@
-import { Button, Dialog, Stack } from "@mui/material";
+import { Button, Dialog, Stack, TextField } from "@mui/material";
 import { Theme } from "../../themes/Theme";
 import { useState } from "react";
 import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
-import { MyTextField } from "../MyTextField";
 
 function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -72,15 +71,14 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
             backgroundColor: Theme.palette.primary.light,
           },
           border: 'none'
-        }}>Nova transação</Button >
+        }}>Nova transação</Button>
 
       <Dialog
         open={open}
-        slotProps={{
-          root: {
-            sx: {
-              backgroundColor: Theme.palette.background.body,
-            }
+        sx={{
+          "& .MuiDialog-paper": {
+            backgroundColor: Theme.palette.secondary.light,
+            color: Theme.palette.primary.contrastText
           }
         }}
       >
@@ -92,23 +90,78 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
           }}>
             <h4>Nova Transação</h4>
 
-            <MyTextField // Textfield que coleta o input de descrição
+            <TextField // Textfield que coleta o input de descrição
               label={"Descrição"}
               value={description}
-              setInputValue={setDescription}
-            ></MyTextField>
+              onChange={(e) => setDescription(e.target.value)}
+              sx={{
+                backgroundColor: Theme.palette.secondary.main,
+                borderRadius: "10px",
+                '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                  color: Theme.palette.primary.contrastText,
+                },
+                '& .MuiInputLabel-root': { // Cor do label do TextField
+                  color: Theme.palette.primary.contrastText,
+                },
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                  },
+                },
+              }}
+            >
+            </TextField>
 
-            <MyTextField // Textfield que coleta o input do preço
+            <TextField // Textfield que coleta o input do preço
               label={"Preço"}
               value={price}
-              setInputValue={setPrice}
-            ></MyTextField>
+              onChange={(e) => setPrice(e.target.value)}
+              sx={{
+                backgroundColor: Theme.palette.secondary.main,
+                borderRadius: "10px",
+                '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                  color: Theme.palette.primary.contrastText,
+                },
+                '& .MuiInputLabel-root': { // Cor do label do TextField
+                  color: Theme.palette.primary.contrastText,
+                },
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                  },
+                },
+              }}
+            />
 
-            <MyTextField // Textfield que colea o input da categoria
+            <TextField // TextField que coleta o input da categoria
               label={"Categoria"}
               value={category}
-              setInputValue={setCategory}
-            ></MyTextField>
+              onChange={(e) => setCategory(e.target.value)}
+              sx={{
+                backgroundColor: Theme.palette.secondary.main,
+                borderRadius: "10px",
+                '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                  color: Theme.palette.primary.contrastText,
+                },
+                '& .MuiInputLabel-root': { // Cor do label do TextField
+                  color: Theme.palette.primary.contrastText,
+                },
+                '& .MuiOutlinedInput-root': {
+                  '&:hover fieldset': {
+                    borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                  },
+                },
+              }}
+            />
 
             <Stack spacing={1} direction={'row'} sx={{
               display: 'flex',
@@ -119,7 +172,7 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
                 onClick={() => setType("entrada")}
                 sx={{
                   borderRadius: "6px",
-                  backgroundColor: Theme.palette.secondary.light,
+                  backgroundColor: Theme.palette.secondary.main,
                   color: Theme.palette.primary.contrastText,
                 }}><ArrowCircleUp color="success"></ArrowCircleUp>Entrada</Button>
 
@@ -127,15 +180,21 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
                 onClick={() => setType("saida")}
                 sx={{
                   borderRadius: "6px",
-                  backgroundColor: Theme.palette.secondary.light,
+                  backgroundColor: Theme.palette.secondary.main,
                   color: Theme.palette.primary.contrastText,
                 }}><ArrowCircleDown color="error"></ArrowCircleDown>Saída</Button>
             </Stack>
 
             <Button // Botão que cadatra nova transação
               onClick={register} variant="contained" sx={{
-                backgroundColor: Theme.palette.primary.light,
-              }}>Cadastrar</Button>
+                backgroundColor: Theme.palette.primary.main,
+                ":hover": {
+                  backgroundColor: Theme.palette.primary.light
+                }
+              }}
+            >Cadastrar
+            </Button>
+
           </Stack>
 
         </Stack>
@@ -146,6 +205,9 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
             position: "absolute",
             alignSelf: "flex-end",
             color: Theme.palette.primary.contrastText,
+            ":hover": {
+              backgroundColor: Theme.palette.primary.light,
+            }
           }}
         >X</Button>
       </Dialog>
