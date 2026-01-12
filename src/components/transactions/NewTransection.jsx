@@ -35,12 +35,12 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
       date: fomarmatedDate,
     };
 
-    if (newTransaction.type === 'entrada') {
+    /* if (newTransaction.type === 'entrada') {
       setValueEntrada(prev => prev + price);
     }
     else {
       setValueSaida(prev => prev + price);
-    }
+    } */
 
     console.log("Registrando:", newTransaction);
 

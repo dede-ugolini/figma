@@ -8,7 +8,8 @@ import { Theme } from '../themes/Theme'
 import { Box } from '@mui/material'
 import BasicCards from "./BasicCards";
 
-function Saldo() {
+function Saldo({ entradas, saidas, total }) {
+
   return (
     <Box
       sx={{
@@ -19,20 +20,20 @@ function Saldo() {
         overflow: "auto",
       }}
     >
-      <BasicCards
-        info="17.400,00"
+      <BasicCards // Card que exibe as entradas
+        info={entradas > 0 ? entradas : "0.00"}
         name="Entradas"
         color={Theme.palette.primary.main}
         Icon={ArrowCircleUp}
       />
-      <BasicCards
-        info="1.259,00"
+      <BasicCards // Card que exibe as saídas
+        info={saidas > 0 ? saidas : "0.00"}
         name="Saidas"
         color={"red"}
         Icon={ArrowCircleDown}
       />
-      <BasicCards
-        info="16.141,00"
+      <BasicCards // Card que exibe o total
+        info={total > 0 ? total : "0.00"}
         name="Total"
         color={Theme.palette.primary.contrastText}
         Icon={AttachMoney}

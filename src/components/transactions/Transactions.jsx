@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 function Transactions({ transactions }) {
   return (
     <>
-      {transactions.map((t, index) => (
+      {transactions.map((t) => (
         <TableContainer>
           <Table sx={{ minWidth: 650 }}>
             <TableHead>
