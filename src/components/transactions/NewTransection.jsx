@@ -3,6 +3,7 @@ import { Theme } from "../../themes/Theme";
 import { useState } from "react";
 import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
 
+// TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
 
   const [open, setOpen] = useState(true);

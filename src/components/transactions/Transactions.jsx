@@ -1,5 +1,6 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, TableFooter } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, TableFooter, Paper } from "@mui/material";
 import { useState } from "react"
+import { Theme } from "../../themes/Theme";
 
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
@@ -20,28 +21,43 @@ export default function Transactions({ transactions }) {
 
   return (
     <>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Descrição</TableCell>
-              <TableCell align="right">Valor</TableCell>
-              <TableCell align="right">Catergoria</TableCell>
-              <TableCell align="right">Data</TableCell>
-            </TableRow>
-          </TableHead>
+      <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree }}>
+        <Table sx={{ minWidth: 850 }}>
+
 
           <TableBody>
             {displayData.map((data) => (
-              <TableRow key={data.id}>
-                <TableCell >{data.description}</TableCell>
-                <TableCell align="right" sx={{
-                  color: data.type === 'saida' ? 'red' : 'green'
+              <TableRow key={data.id} >
+                <TableCell sx={{ // Célula que armazena a descriçãp
+                  color: Theme.palette.text.base,
+                  borderBottom: "1px solid #000000"
+                }}
+                >{data.description}
+                </TableCell>
+
+                <TableCell align="right" sx={{ // Célula que armazena o preço
+                  color: data.type === 'saida' ? 'red' : Theme.palette.primary.main,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000"
                 }}
                 >R$ {data.price}
                 </TableCell>
-                <TableCell align="right">{data.category}</TableCell>
-                <TableCell align="right">{data.date}</TableCell>
+
+                <TableCell align="right" sx={{ // Célula que armazena categoria
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000"
+                }}
+                >{data.category}
+                </TableCell>
+
+                <TableCell align="right" sx={{ // Célula que armazena data
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000"
+                }}
+                >{data.date}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -55,6 +71,10 @@ export default function Transactions({ transactions }) {
               onRowsPerPageChange={handleChangeRowsPerPage}
               rowsPerPageOptions={[5, 10, 20]}
               labelRowsPerPage={"Linhas por página"}
+              sx={{
+                color: Theme.palette.text.base,
+                fontWeight: 600, borderBottom: "1px solid #000000"
+              }}
             >
             </TablePagination>
           </TableFooter>
