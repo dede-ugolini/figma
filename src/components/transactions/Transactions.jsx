@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, TableFooter } from "@mui/material";
 import { useState } from "react"
 
+//TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
   const [page, setPage] = useState(0); // Diferente do componente Pagination, o componente TablePagination utiliza zero-based index, então a primeira pagina utiliza o index 0 e não 1 como em Pagination
@@ -53,6 +54,7 @@ export default function Transactions({ transactions }) {
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               rowsPerPageOptions={[5, 10, 20]}
+              labelRowsPerPage={"Linhas por página"}
             >
             </TablePagination>
           </TableFooter>

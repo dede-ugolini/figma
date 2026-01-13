@@ -31,7 +31,7 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
     const fomarmatedDate = `${day}/${month}/${year}`;
 
     const newTransaction = {
-      id: Date.now,
+      id: Date.now(),
       description,
       price: Number(price),
       category,
@@ -60,6 +60,13 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
       return;
     }
 
+    if (newTransaction.type.length === 0) {
+      setMessage("Transação precisa ser saída ou entrada");
+      setSuccess(false);
+      setOpenAlert(true);
+      return;
+    }
+
     if (newTransaction.type === 'entrada') {
       setValueEntrada(prev => prev + price);
     }
@@ -75,7 +82,7 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
 
     //Limpando os campos
     setDescription("");
-    setPrice("");
+    setPrice(0);
     setCategory("");
     setType("");
     // Fecha o dialog
@@ -143,8 +150,7 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
 
             <TextField // Textfield que coleta o input do preço
               label={"Preço"}
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(Number(e.target.value))}
               sx={{
                 backgroundColor: Theme.palette.secondary.main,
                 borderRadius: "10px",
