@@ -2,11 +2,13 @@ import { Alert, Button, Dialog, Snackbar, Stack, TextField } from "@mui/material
 import { Theme } from "../../themes/Theme";
 import { useState } from "react";
 import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
+import { useTransaction } from "../../context/TransactionContext";
 
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
-export default function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
+export default function NewTransection() {
 
-  const [open, setOpen] = useState(true);
+  const { open, setOpen, addTransaction } = useTransaction();
+
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
@@ -15,14 +17,9 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
   const [openAlert, setOpenAlert] = useState(false);
   const [message, setMessage] = useState("");
 
-  function clickToOpen() {
-    setOpen(true);
-  }
-
   function clickToClose() {
     setOpen(false);
   }
-
 
   function register() {
     const data = new Date();
@@ -82,18 +79,12 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
       return;
     }
 
-    if (newTransaction.type === 'entrada') {
-      setValueEntrada(prev => prev + price);
-    }
-    else {
-      setValueSaida(prev => prev + price);
-    }
-
     setMessage("Transação cadastrada com sucesso!");
     setSuccess(true);
     setOpenAlert(true);
+
     // Enviando o objeto de transação para o componente que me chamou.
-    onAddTransaction(newTransaction)
+    addTransaction(newTransaction)
 
     //Limpando os campos
     setDescription("");
@@ -106,21 +97,6 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
 
   return (
     <>
-      <Button // Botão do header que abre o dialog para nova transação
-        onClick={clickToOpen}
-        variant="outlined"
-        size="medium"
-        sx={{
-          backgroundColor: Theme.palette.primary.light,
-          color: Theme.palette.primary.contrastText,
-          fontSize: "14px",
-          textTransform: "none",
-          "&:hover": {
-            backgroundColor: Theme.palette.primary.light,
-          },
-          border: 'none'
-        }}>Nova transação</Button>
-
       <Dialog
         open={open}
         sx={{

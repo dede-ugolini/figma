@@ -1,9 +1,13 @@
 import { Theme } from "../themes/Theme";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Button } from "@mui/material";
 import NomeEmpresa from "./NomeEmpresa";
 import NewTransection from "./transactions/NewTransection";
+import { useTransaction } from "../context/TransactionContext";
 
 function Header() {
+
+  const { setOpen } = useTransaction();
+
   return (
     <>
       <Box sx={{
@@ -24,7 +28,22 @@ function Header() {
             <NomeEmpresa />
           </Stack>
           <Stack direction={"row"}>
-            <NewTransection />
+            <Button // Botão do header que abre o dialog para nova transação
+              onClick={() => setOpen(true)}
+              variant="outlined"
+              size="medium"
+              sx={{
+                backgroundColor: Theme.palette.primary.light,
+                color: Theme.palette.primary.contrastText,
+                fontSize: "14px",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: Theme.palette.primary.light,
+                },
+                border: 'none'
+              }}>Nova transação</Button>
+            {open && (<NewTransection />)}
+
           </Stack>
         </Box>
       </Box>
