@@ -117,6 +117,8 @@ export default function NewTransection() {
             <TextField // Textfield que coleta o input de descrição
               label={"Descrição"}
               value={description}
+              placeholder="Digite a descrição do produto"
+              multiline={true}
               onChange={(e) => setDescription(e.target.value)}
               sx={{
                 backgroundColor: Theme.palette.secondary.main,
@@ -141,7 +143,9 @@ export default function NewTransection() {
 
             <TextField // Textfield que coleta o input do preço
               label={"Preço"}
+              type="number"
               onChange={(e) => setPrice(Number(e.target.value))}
+              placeholder="Digite o preço do produto"
               sx={{
                 backgroundColor: Theme.palette.secondary.main,
                 borderRadius: "10px",
@@ -165,6 +169,7 @@ export default function NewTransection() {
             <TextField // TextField que coleta o input da categoria
               label={"Categoria"}
               value={category}
+              placeholder="Digite a categoria do produto"
               onChange={(e) => setCategory(e.target.value)}
               sx={{
                 backgroundColor: Theme.palette.secondary.main,
