@@ -15,6 +15,10 @@ export const Theme = createTheme({
       grayThree: "#29292E", // middle gray
       contrastText: "#fff",
     },
+    text: {
+      base: "#C4C4CC",
+      tittle: "#E1E1E6",
+    },
     background: {
       body: "#202024", // bold gray
       header: "#141416"
