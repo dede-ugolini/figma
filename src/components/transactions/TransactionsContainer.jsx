@@ -9,7 +9,6 @@ export default function TransactionsContainer() {
   const [search, setSearch] = useState("");
   const [entradas, setEntradas] = useState(0);
   const [saidas, setSaidas] = useState(0);
-  const total = entradas - saidas;
 
   /* NOTE: Esssa função ficou inutilizada depois de implementar a filtragem */
 

@@ -1,15 +1,18 @@
-import { Button, Dialog, Stack, TextField } from "@mui/material";
+import { Alert, Button, Dialog, Snackbar, Stack, TextField } from "@mui/material";
 import { Theme } from "../../themes/Theme";
 import { useState } from "react";
 import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
 
-function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
+export default function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
 
   const [open, setOpen] = useState(true);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [type, setType] = useState("entrada");
+  const [success, setSuccess] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [message, setMessage] = useState("");
 
   function clickToOpen() {
     setOpen(true);
@@ -36,6 +39,27 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
       date: fomarmatedDate,
     };
 
+    if (isNaN(newTransaction.price)) {
+      setMessage("Por favor, digite um número válido!");
+      setSuccess(false);
+      setOpenAlert(true);
+      return;
+    }
+
+    if (newTransaction.description.length === 0) {
+      setMessage("Descrição não pode estar vazia");
+      setSuccess(false);
+      setOpenAlert(true);
+      return;
+    }
+
+    if (newTransaction.category.length === 0) {
+      setMessage("Categoria não pode estar vazia!");
+      setSuccess(false);
+      setOpenAlert(true);
+      return;
+    }
+
     if (newTransaction.type === 'entrada') {
       setValueEntrada(prev => prev + price);
     }
@@ -43,8 +67,9 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
       setValueSaida(prev => prev + price);
     }
 
-    console.log("Registrando:", newTransaction);
-
+    setMessage("Transação cadastrada com sucesso!");
+    setSuccess(true);
+    setOpenAlert(true);
     // Enviando o objeto de transação para o componente que me chamou.
     onAddTransaction(newTransaction)
 
@@ -53,10 +78,10 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
     setPrice("");
     setCategory("");
     setType("");
-
     // Fecha o dialog
     setOpen(false);
   }
+
   return (
     <>
       <Button // Botão do header que abre o dialog para nova transação
@@ -164,7 +189,7 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
               }}
             />
 
-            <Stack spacing={1} direction={'row'} sx={{
+            <Stack spacing={1} direction={'row'} sx={{ // Stack que armazena os botões de entradas e saídas
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -212,7 +237,30 @@ function NewTransection({ setValueEntrada, setValueSaida, onAddTransaction }) {
           }}
         >X</Button>
       </Dialog>
+
+      <Snackbar // Snackbar em caso de falha
+        open={openAlert && !success}
+        autoHideDuration={2000}
+        onClose={() => setOpenAlert(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
+      >
+        <Alert severity="error" variant="filled" onClose={() => setOpenAlert(false)}>{message}</Alert>
+      </Snackbar>
+
+      <Snackbar // Snackbar em caso de sucesso
+        open={openAlert && success}
+        autoHideDuration={2000}
+        onClose={() => setOpenAlert(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
+      >
+        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>{message}</Alert>
+      </Snackbar>
     </>
   )
 }
-export default NewTransection;
