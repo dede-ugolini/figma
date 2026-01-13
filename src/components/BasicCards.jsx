@@ -33,7 +33,7 @@ function BasicCards({ info, name, Icon, color }) {
             fontWeight: "bold"
           }}
         >
-          R$ {info}
+          R$ {parseInt(info)}
         </p>
       </Box>
       <Icon

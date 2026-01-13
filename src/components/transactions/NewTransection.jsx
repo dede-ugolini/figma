@@ -7,7 +7,7 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
 
   const [open, setOpen] = useState(true);
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [type, setType] = useState("entrada");
   const [success, setSuccess] = useState(false);
