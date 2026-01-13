@@ -21,8 +21,8 @@ export default function Transactions({ transactions }) {
 
   return (
     <>
-      <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree }}>
-        <Table sx={{ minWidth: 850 }}>
+      <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree, width: "100%" }}>
+        <Table sx={{ minWidth: '80%' }}>
 
 
           <TableBody>
@@ -62,7 +62,9 @@ export default function Transactions({ transactions }) {
             ))}
           </TableBody>
 
-          <TableFooter>
+          <TableFooter sx={{
+            paddingTop: 100
+          }}>
             <TablePagination // Componente que faz a paginação das transações
               count={transactions.length}
               page={page}
@@ -73,7 +75,9 @@ export default function Transactions({ transactions }) {
               labelRowsPerPage={"Linhas por página"}
               sx={{
                 color: Theme.palette.text.base,
-                fontWeight: 600, borderBottom: "1px solid #000000"
+                fontWeight: 600,
+                borderBottom: "1px solid #000000",
+                paddingTop: 30,
               }}
             >
             </TablePagination>

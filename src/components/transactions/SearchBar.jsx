@@ -7,12 +7,12 @@ function SearchBar({ search, setSearch }) {
   return (
 
     <>
-      <Stack spacing={2} direction='collumn' sx={{
+      <Stack direction='collumn' sx={{
         width: "100%",
-        height: "40px"
       }}>
         <Stack sx={{
-          width: "70%"
+          width: "80%",
+          paddingRight: "1%",
         }}>
           <TextField
             label={"Busque uma Transação"}
@@ -20,7 +20,7 @@ function SearchBar({ search, setSearch }) {
             onChange={(e) => setSearch(e.target.value)}
             sx={{
               color: "secondary.main",
-              backgroundColor: Theme.palette.secondary.light,
+              backgroundColor: Theme.palette.secondary.main,
               borderRadius: "10px",
               '& .MuiInputBase-input': { // Cor do texto de input do usuário
                 color: Theme.palette.primary.contrastText,
@@ -36,22 +36,23 @@ function SearchBar({ search, setSearch }) {
                   borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
                 },
               },
-              input: { color: "" }
+              input: { color: "" },
+              border: "none"
             }}
           />
         </Stack>
         <Stack sx={{
-          width: "30%"
+          width: "20%"
         }}>
           <Button
             variant="outlined"
-            size="medium"
             disableElevation={true}
             sx={{
+              borderRadius: "10%",
               backgroundColor: Theme.palette.secondary.main,
+              height: "100%",
               color: Theme.palette.primary.main,
               fontSize: "14px",
-              padding: "7px 25px 7px 25px",
               textTransform: "none",
               "&:hover": {
                 backgroundColor: Theme.palette.primary.light,

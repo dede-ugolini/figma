@@ -2,7 +2,7 @@ import { Theme } from '../themes/Theme.jsx'
 import { Stack, Box } from '@mui/material'
 
 import Header from './Header.jsx'
-import { TransactionProvider, TransactionContext } from '../context/TransactionContext.jsx'
+import { TransactionProvider } from '../context/TransactionContext.jsx'
 import TransactionContainer from './transactions/TransactionsContainer.jsx'
 
 export default function Main() {
@@ -19,15 +19,15 @@ export default function Main() {
         }}
         >
           <Stack sx={{ // Stack do Cabeçalho
-            height: "300px",
+            height: "200px",
             width: "100%"
           }}>
             <Header />
           </Stack>
 
-          <Stack sx={{ // Stack que armazena os 3 cards de saldo e a o container que guarda a barra de pesquisa e transações.
+          <Stack spacing={5} sx={{ // Stack que armazena os 3 cards de saldo e a o container que guarda a barra de pesquisa e transações.
             position: 'relative',
-            top: '-10rem',
+            top: '-3rem',
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -35,14 +35,6 @@ export default function Main() {
           }}>
             <TransactionContainer />
           </Stack>
-
-          <Box sx={{
-            backgroundColor: Theme.palette.background.body,
-            width: '100%',
-            height: '200vh'
-          }}>
-
-          </Box>
 
         </Stack>
       </TransactionProvider>

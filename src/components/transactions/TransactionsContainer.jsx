@@ -3,6 +3,7 @@ import Transactions from "./Transactions";
 import SearchBar from "./SearchBar";
 import Saldo from "../Saldo"
 import { useTransaction } from "../../context/TransactionContext";
+import Stack from "@mui/material/Stack"
 
 export default function TransactionsContainer() {
   const [search, setSearch] = useState("");
@@ -14,7 +15,9 @@ export default function TransactionsContainer() {
     <>
       <Saldo entradas={entradas} saidas={saidas} total={entradas - saidas} />
       <SearchBar search={search} setSearch={setSearch} />
-      <Transactions transactions={filteredSearch} />
+      <Stack sx={{ width: "100%" }}>
+        <Transactions transactions={filteredSearch} />
+      </Stack>
     </>
   );
 }
