@@ -54,6 +54,20 @@ export default function NewTransection({ setValueEntrada, setValueSaida, onAddTr
       return;
     }
 
+    if (newTransaction.price === 0) {
+      setMessage("Preço precisa ser maior que zero!");
+      setSuccess(false);
+      setOpenAlert(true);
+      return;
+    }
+
+    if (newTransaction.price < 0) {
+      setMessage("Preço não pode ser valor negativo!");
+      setSuccess(false);
+      setOpenAlert(true);
+      return;
+    }
+
     if (newTransaction.category.length === 0) {
       setMessage("Categoria não pode estar vazia!");
       setSuccess(false);
