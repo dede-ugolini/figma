@@ -17,7 +17,7 @@ function Transactions({ transactions }) {
                 <TableCell >{t.description}</TableCell>
                 <TableCell align="right" sx={{
                   color: t.type === 'saida' ? 'red' : 'green'
-                }}>{t.price}</TableCell>
+                }}>R$ {t.price}</TableCell>
                 <TableCell align="right">{t.category}</TableCell>
                 <TableCell align="right">{t.date}</TableCell>
               </TableRow>
