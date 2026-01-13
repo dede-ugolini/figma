@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, TableFooter, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableRow, TablePagination, TableFooter } from "@mui/material";
 import { useState } from "react"
 import { Theme } from "../../themes/Theme";
 
