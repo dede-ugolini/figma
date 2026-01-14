@@ -40,7 +40,7 @@ export default function Transactions({ transactions }) {
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
-                >R$ {data.price}
+                >R$ {data.price.toFixed(2)}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena categoria

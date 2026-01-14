@@ -33,7 +33,7 @@ function BasicCards({ info, name, Icon, color }) {
             fontWeight: "bold"
           }}
         >
-          R$ {parseInt(info)}
+          R$ {parseInt(info).toFixed(2)}
         </p>
       </Box>
       <Icon
