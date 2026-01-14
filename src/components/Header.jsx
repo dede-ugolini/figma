@@ -1,8 +1,8 @@
 import { Theme } from "../themes/Theme";
 import { Box, Stack, Button } from "@mui/material";
-import NomeEmpresa from "./NomeEmpresa";
 import NewTransection from "./transactions/NewTransection";
 import { useTransaction } from "../context/TransactionContext";
+import image from '../assets/image.png';
 
 function Header() {
 
@@ -25,7 +25,7 @@ function Header() {
           alignItems: 'center'
         }}>
           <Stack direction={"row"}>
-            <NomeEmpresa />
+            <img src={image} alt="Finance" width={180} height={50} />
           </Stack>
           <Stack direction={"row"}>
             <Button // Botão do header que abre o dialog para nova transação
