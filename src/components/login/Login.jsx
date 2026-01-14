@@ -52,7 +52,7 @@ export default function Login() {
   };
 
   if (logged) {
-    return <Navigate to={"/Main"} />
+    return <Navigate to={"/home"} />
   }
 
   const handleRegister = (newData) => {
