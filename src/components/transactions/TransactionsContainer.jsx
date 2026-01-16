@@ -1,9 +1,11 @@
+import Stack from "@mui/material/Stack";
+
 import { useState } from "react";
-import Transactions from "./Transactions";
-import SearchBar from "./SearchBar";
-import Saldo from "../Saldo"
+
 import { useTransaction } from "../../context/TransactionContext";
-import Stack from "@mui/material/Stack"
+import Saldo from "../Saldo";
+import SearchBar from "./SearchBar";
+import Transactions from "./Transactions";
 
 export default function TransactionsContainer() {
   const [search, setSearch] = useState("");

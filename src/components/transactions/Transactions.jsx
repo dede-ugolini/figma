@@ -1,5 +1,12 @@
-import { Table, TableBody, TableCell, TableContainer, TableRow, TablePagination, TableFooter } from "@mui/material";
-import { useState } from "react"
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+
+import { useState } from "react";
 import { Theme } from "../../themes/Theme";
 
 //TODO: Adicionar sorting

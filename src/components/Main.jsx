@@ -1,5 +1,5 @@
 import { Theme } from '../themes/Theme.jsx'
-import { Stack, Box } from '@mui/material'
+import Stack from '@mui/material/Stack'
 
 import Header from './Header.jsx'
 import { TransactionProvider } from '../context/TransactionContext.jsx'

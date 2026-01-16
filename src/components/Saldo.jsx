@@ -1,11 +1,13 @@
-import {
-  AttachMoney,
-  ArrowCircleUp,
-  ArrowCircleDown,
-} from "@mui/icons-material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 
 import { Theme } from '../themes/Theme';
-import { Card, CardContent, CardActions, Stack } from '@mui/material';
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Stack from "@mui/material/Stack";
 
 export default function Saldo({ entradas, saidas, total }) {
 
@@ -16,7 +18,7 @@ export default function Saldo({ entradas, saidas, total }) {
           <CardContent sx={{ paddingLeft: "40px", paddingTop: "30px", paddingBottom: "0px" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <h4>Entradas </h4>
-              <ArrowCircleUp />
+              <ArrowCircleUpIcon />
             </Stack>
             <h1> R$ {entradas.toFixed(2)}</h1>
           </CardContent>
@@ -28,7 +30,7 @@ export default function Saldo({ entradas, saidas, total }) {
           <CardContent sx={{ paddingLeft: "40px", paddingTop: "30px", paddingBottom: "0px" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <h4>Saídas  </h4>
-              <ArrowCircleDown sx={{ color: "red" }} />
+              <ArrowCircleDownIcon sx={{ color: "red" }} />
             </Stack>
             <h1> R$ {saidas.toFixed(2)}</h1>
           </CardContent>
@@ -40,7 +42,7 @@ export default function Saldo({ entradas, saidas, total }) {
           <CardContent sx={{ paddingLeft: "40px", paddingTop: "30px", paddingBottom: "0px" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <h4>Total</h4>
-              <AttachMoney />
+              <AttachMoneyIcon />
             </Stack>
             <h1 style={{ color: total >= 0 ? "" : "red" }}> R$ {total.toFixed(2)}</h1>
           </CardContent>

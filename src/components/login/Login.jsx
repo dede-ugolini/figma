@@ -1,12 +1,18 @@
 import { Navigate } from 'react-router-dom';
 
-import { Button, Stack, TextField, Alert, AlertTitle, Snackbar } from "@mui/material";
-import { useState } from 'react'
+import Alert from "@mui/material/Alert";
+import AlertTitle from '@mui/material/AlertTitle';
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 
-import { Theme } from '../../themes/Theme.jsx'
-import Register from './Register.jsx'
+import { useState } from 'react';
 
-import loginApi from '../../api/login.json'
+import { Theme } from '../../themes/Theme.jsx';
+import Register from './Register.jsx';
+
+import loginApi from '../../api/login.json';
 
 //TODO: Implementar proteção de rota, para que usuário que não esteja logado não consiga acessar Main
 
