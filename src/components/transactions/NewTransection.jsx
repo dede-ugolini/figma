@@ -103,6 +103,8 @@ export default function NewTransection() {
     setPrice(0);
     setCategory("");
     setType("");
+    setEntradaActive(false);
+    setSaidaActive(false);
     // Fecha o dialog
     setOpen(false);
   }

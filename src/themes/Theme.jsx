@@ -15,26 +15,36 @@ export const Theme = createTheme({
       grayThree: "#29292E", // middle gray
       contrastText: "#fff",
     },
+
     text: {
       base: "#C4C4CC",
-      tittle: "#E1E1E6",
+      title: "#E1E1E6",
     },
     background: {
-      body: "#202024", // bold gray
-      header: "#141416"
+      default: "#202024",
+      paper: "#000000",
+    },
+  },
+
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          textTransform: "none",
+          ":hover": {
+            background: "#00B37E",
+          }
+        },
+      },
     },
   },
 
   typography: {
     fontFamily: 'Roboto, sans-serif',
-    boxSpace: {
-      size: "30px",
-    },
-    card: {
-      size: "14px",
-      sizePrice: "24px",
-      sizeLine: "160%"
-    },
+
     fontWeightRegular: 400,
     fontWeightBold: 700,
 
