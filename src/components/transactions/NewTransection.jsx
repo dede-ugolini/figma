@@ -12,6 +12,7 @@ import { Theme } from "../../themes/Theme";
 
 import { useState } from "react";
 import { useTransaction } from "../../context/TransactionContext";
+import { Typography } from "@mui/material";
 
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
@@ -108,12 +109,6 @@ export default function NewTransection() {
     <>
       <Dialog
         open={open}
-        sx={{
-          "& .MuiDialog-paper": {
-            backgroundColor: Theme.palette.secondary.light,
-            color: Theme.palette.primary.contrastText
-          }
-        }}
       >
         <Stack>
           <Stack spacing={2} sx={{
@@ -121,7 +116,7 @@ export default function NewTransection() {
             width: "350px",
             height: "450px"
           }}>
-            <h4>Nova Transação</h4>
+            <h4 style={{ color: Theme.palette.primary.contrastText }}>Nova Transação</h4>
 
             <TextField // Textfield que coleta o input de descrição
               label={"Descrição"}
@@ -224,12 +219,9 @@ export default function NewTransection() {
 
             <Button // Botão que cadatra nova transação
               onClick={register} variant="contained" sx={{
-                backgroundColor: Theme.palette.primary.main,
-                ":hover": {
-                  backgroundColor: Theme.palette.primary.light
-                }
-              }}
-            >Cadastrar
+                textTransform: "none",
+              }}>
+              <Typography>Cadastrar</Typography>
             </Button>
 
           </Stack>
@@ -241,9 +233,9 @@ export default function NewTransection() {
           sx={{
             position: "absolute",
             alignSelf: "flex-end",
-            color: Theme.palette.primary.contrastText,
+            color: Theme.palette.text.base,
             ":hover": {
-              backgroundColor: Theme.palette.primary.light,
+              backgroundColor: Theme.palette.primary.main
             }
           }}
         >X</Button>
