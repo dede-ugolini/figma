@@ -205,22 +205,22 @@ export default function NewTransection() {
                   ":active": {
                     backgroundColor: "primary.main"
                   }
-                }}><ArrowCircleUp color="success"></ArrowCircleUp>Entrada</Button>
+                }}><ArrowCircleUp color={entradaActive ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
 
               <Button // Botão que define se transação é do tipo saída 
                 onClick={handleClickSaidas}
                 sx={{
                   width: "50%",
                   borderRadius: "9px",
-                  backgroundColor: saidaActive ? "red" : Theme.palette.secondary.main,
+                  backgroundColor: saidaActive ? "#AA2834" : Theme.palette.secondary.main,
                   color: Theme.palette.primary.contrastText,
                   ":hover": {
-                    backgroundColor: saidaActive ? "red" : "secondary.light",
+                    backgroundColor: saidaActive ? "#AA2834" : "secondary.light",
                   },
                   ":active": {
-                    backgroundColor: "red",
+                    backgroundColor: "#AA2834",
                   }
-                }}><ArrowCircleDown color="error"></ArrowCircleDown>Saída</Button>
+                }}><ArrowCircleDown sx={{ color: saidaActive ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
             </Stack>
 
             <Button // Botão que cadatra nova transação
