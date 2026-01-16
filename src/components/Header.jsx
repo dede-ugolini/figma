@@ -1,5 +1,3 @@
-import { Theme } from "../themes/Theme";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -19,7 +17,7 @@ export default function Header() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: Theme.palette.background.paper,
+        background: "#121214"
       }}>
         <Box sx={{
           width: '80%',
