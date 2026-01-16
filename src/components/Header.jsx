@@ -19,7 +19,7 @@ export default function Header() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: Theme.palette.background.header,
+        background: Theme.palette.background.paper,
       }}>
         <Box sx={{
           width: '80%',
@@ -34,20 +34,13 @@ export default function Header() {
           <Stack direction={"row"}>
             <Button // Botão do header que abre o dialog para nova transação
               onClick={() => setOpen(true)}
-              variant="outlined"
-              size="medium"
-              sx={{
-                backgroundColor: Theme.palette.primary.light,
-                color: Theme.palette.primary.contrastText,
-                fontSize: "14px",
-                textTransform: "none",
-                "&:hover": {
-                  backgroundColor: Theme.palette.primary.light,
-                },
-                border: 'none'
-              }}>Nova transação</Button>
+              color="primary"
+              variant="contained"
+              sx={{ textTransform: "none" }}
+            >
+              Nova transação
+            </Button>
             {open && (<NewTransection />)}
-
           </Stack>
         </Box>
       </Box>
