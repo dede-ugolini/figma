@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 
 import SearchIcon from '@mui/icons-material/Search';
 import { Theme } from '../../themes/Theme';
+import { Paper } from "@mui/material";
 
 export default function SearchBar({ search, setSearch }) {
 
@@ -18,50 +19,32 @@ export default function SearchBar({ search, setSearch }) {
           paddingRight: "1%",
         }}>
           <TextField
+            component={Paper}
             label={"Busque uma Transação"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            variant="filled"
             sx={{
-              color: "secondary.main",
-              backgroundColor: Theme.palette.secondary.main,
-              borderRadius: "10px",
-              '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                color: Theme.palette.primary.contrastText,
-              },
               '& .MuiInputLabel-root': { // Cor do label do TextField
-                color: Theme.palette.primary.contrastText,
+                color: Theme.palette.text.base,
               },
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
-                },
+              '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                color: Theme.palette.text.base,
               },
-              input: { color: "" },
-              border: "none"
-            }}
-          />
+            }}>
+          </TextField>
         </Stack>
         <Stack sx={{
           width: "20%"
         }}>
           <Button
             variant="outlined"
-            disableElevation={true}
             sx={{
-              borderRadius: "10%",
-              backgroundColor: Theme.palette.secondary.main,
               height: "100%",
-              color: Theme.palette.primary.main,
-              fontSize: "14px",
               textTransform: "none",
-              "&:hover": {
-                backgroundColor: Theme.palette.primary.light,
+              ":hover": {
                 color: Theme.palette.primary.contrastText
-              },
-              border: 'none'
+              }
             }}
           >
             <SearchIcon></SearchIcon>

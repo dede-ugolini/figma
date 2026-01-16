@@ -43,11 +43,11 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena o preço
-                  color: data.type === 'saida' ? 'red' : Theme.palette.primary.main,
+                  color: data.type === 'saida' ? '#F75A68' : Theme.palette.primary.main,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
-                >R$ {data.price.toFixed(2)}
+                >R$ {data.price.toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena categoria
