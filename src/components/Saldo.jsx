@@ -20,7 +20,7 @@ export default function Saldo({ entradas, saidas, total }) {
               <h4>Entradas </h4>
               <ArrowCircleUpIcon />
             </Stack>
-            <h1> R$ {entradas.toFixed(2)}</h1>
+            <h1> R$ {entradas.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
           </CardContent>
           <CardActions>
           </CardActions>
@@ -32,7 +32,7 @@ export default function Saldo({ entradas, saidas, total }) {
               <h4>Saídas  </h4>
               <ArrowCircleDownIcon sx={{ color: "red" }} />
             </Stack>
-            <h1> R$ {saidas.toFixed(2)}</h1>
+            <h1> R$ {saidas.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
           </CardContent>
           <CardActions>
           </CardActions>
@@ -44,7 +44,7 @@ export default function Saldo({ entradas, saidas, total }) {
               <h4>Total</h4>
               <AttachMoneyIcon />
             </Stack>
-            <h1 style={{ color: total >= 0 ? "" : "red" }}> R$ {total.toFixed(2)}</h1>
+            <h1 style={{ color: total >= 0 ? "" : "red" }}> R$ {total.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
           </CardContent>
           <CardActions>
           </CardActions>
