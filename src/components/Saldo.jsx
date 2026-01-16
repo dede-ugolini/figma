@@ -14,7 +14,7 @@ export default function Saldo({ entradas, saidas, total }) {
   return (
     <>
       <Stack direction={"row"} spacing={4} sx={{ width: "100%" }}>
-        <Card sx={{ backgroundColor: Theme.palette.secondary.grayThree, color: Theme.palette.text.tittle, width: "33%", padding: "10px" }}>
+        <Card sx={{ backgroundColor: Theme.palette.secondary.grayThree, color: Theme.palette.text.title, width: "33%", padding: "10px" }}>
           <CardContent sx={{ paddingLeft: "40px", paddingTop: "30px", paddingBottom: "0px" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <h4>Entradas </h4>
@@ -26,7 +26,7 @@ export default function Saldo({ entradas, saidas, total }) {
           </CardActions>
         </Card>
 
-        <Card sx={{ backgroundColor: Theme.palette.secondary.grayThree, color: Theme.palette.text.tittle, width: "33%" }}>
+        <Card sx={{ backgroundColor: Theme.palette.secondary.grayThree, color: Theme.palette.text.title, width: "33%" }}>
           <CardContent sx={{ paddingLeft: "40px", paddingTop: "30px", paddingBottom: "0px" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <h4>Saídas  </h4>
@@ -38,7 +38,7 @@ export default function Saldo({ entradas, saidas, total }) {
           </CardActions>
         </Card>
 
-        <Card sx={{ backgroundColor: Theme.palette.primary.dark, color: Theme.palette.text.tittle, width: "33%" }}>
+        <Card sx={{ backgroundColor: Theme.palette.primary.dark, color: Theme.palette.text.title, width: "33%" }}>
           <CardContent sx={{ paddingLeft: "40px", paddingTop: "30px", paddingBottom: "0px" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <h4>Total</h4>
