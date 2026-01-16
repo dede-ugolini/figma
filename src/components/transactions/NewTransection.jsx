@@ -12,7 +12,7 @@ import { Theme } from "../../themes/Theme";
 
 import { useState } from "react";
 import { useTransaction } from "../../context/TransactionContext";
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
@@ -22,10 +22,12 @@ export default function NewTransection() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
-  const [type, setType] = useState("entrada");
+  const [type, setType] = useState("");
   const [success, setSuccess] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [message, setMessage] = useState("");
+  const [entradaActive, setEntradaActive] = useState(false);
+  const [saidaActive, setSaidaActive] = useState(false);
 
   function clickToClose() {
     setOpen(false);
@@ -105,10 +107,27 @@ export default function NewTransection() {
     setOpen(false);
   }
 
+  const handleClickEntradas = () => {
+    setType("entrada");
+    setEntradaActive(true);
+    setSaidaActive(false);
+  }
+
+  const handleClickSaidas = () => {
+    setType("saida");
+    setEntradaActive(false);
+    setSaidaActive(true);
+  }
+
   return (
     <>
       <Dialog
         open={open}
+        slotProps={{
+          paper: {
+            sx: { backgroundColor: "#29292E" }
+          }
+        }}
       >
         <Stack>
           <Stack spacing={2} sx={{
@@ -119,78 +138,51 @@ export default function NewTransection() {
             <h4 style={{ color: Theme.palette.primary.contrastText }}>Nova Transação</h4>
 
             <TextField // Textfield que coleta o input de descrição
+              component={Paper}
               label={"Descrição"}
               value={description}
-              placeholder="Digite a descrição do produto"
+              placeholder="Descrição do produto"
               multiline={true}
               onChange={(e) => setDescription(e.target.value)}
               sx={{
-                backgroundColor: Theme.palette.secondary.main,
-                borderRadius: "10px",
-                '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  color: Theme.palette.primary.contrastText,
-                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  color: Theme.palette.primary.contrastText,
+                  color: Theme.palette.text.base,
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&:hover fieldset': {
-                    borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
-                  },
+                '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                  color: Theme.palette.text.base,
                 },
               }}
             >
             </TextField>
 
             <TextField // Textfield que coleta o input do preço
+              component={Paper}
               label={"Preço"}
               type="number"
               onChange={(e) => setPrice(Number(e.target.value))}
-              placeholder="Digite o preço do produto"
+              placeholder="Preço do produto"
               sx={{
-                backgroundColor: Theme.palette.secondary.main,
-                borderRadius: "10px",
-                '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  color: Theme.palette.primary.contrastText,
-                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  color: Theme.palette.primary.contrastText,
+                  color: Theme.palette.text.base,
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&:hover fieldset': {
-                    borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
-                  },
+                '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                  color: Theme.palette.text.base,
                 },
               }}
             />
 
             <TextField // TextField que coleta o input da categoria
+              component={Paper}
               label={"Categoria"}
               value={category}
-              placeholder="Digite a categoria do produto"
+              placeholder="Categoria do produto"
               onChange={(e) => setCategory(e.target.value)}
               sx={{
-                backgroundColor: Theme.palette.secondary.main,
-                borderRadius: "10px",
-                '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  color: Theme.palette.primary.contrastText,
-                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  color: Theme.palette.primary.contrastText,
+                  color: Theme.palette.text.base,
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&:hover fieldset': {
-                    borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
-                  },
+                '& .MuiInputBase-input': { // Cor do texto de input do usuário
+                  color: Theme.palette.text.base,
                 },
               }}
             />
@@ -201,19 +193,33 @@ export default function NewTransection() {
               justifyContent: 'center'
             }}>
               <Button // Botão que define se transação é do tipo entrada
-                onClick={() => setType("entrada")}
+                onClick={handleClickEntradas}
                 sx={{
-                  borderRadius: "6px",
-                  backgroundColor: Theme.palette.secondary.main,
+                  width: "50%",
+                  borderRadius: "9px",
+                  backgroundColor: entradaActive ? "primary.main" : Theme.palette.secondary.main,
                   color: Theme.palette.primary.contrastText,
+                  ":hover": {
+                    backgroundColor: entradaActive ? "primary.main" : "secondary.light",
+                  },
+                  ":active": {
+                    backgroundColor: "primary.main"
+                  }
                 }}><ArrowCircleUp color="success"></ArrowCircleUp>Entrada</Button>
 
               <Button // Botão que define se transação é do tipo saída 
-                onClick={() => setType("saida")}
+                onClick={handleClickSaidas}
                 sx={{
-                  borderRadius: "6px",
-                  backgroundColor: Theme.palette.secondary.main,
+                  width: "50%",
+                  borderRadius: "9px",
+                  backgroundColor: saidaActive ? "red" : Theme.palette.secondary.main,
                   color: Theme.palette.primary.contrastText,
+                  ":hover": {
+                    backgroundColor: saidaActive ? "red" : "secondary.light",
+                  },
+                  ":active": {
+                    backgroundColor: "red",
+                  }
                 }}><ArrowCircleDown color="error"></ArrowCircleDown>Saída</Button>
             </Stack>
 
