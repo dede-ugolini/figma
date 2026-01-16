@@ -1,8 +1,11 @@
-import { Stack, Button, Box, TextField, } from '@mui/material'
-import { Theme } from '../../themes/Theme';
-import SearchIcon from '@mui/icons-material/Search';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 
-function SearchBar({ search, setSearch }) {
+import SearchIcon from '@mui/icons-material/Search';
+import { Theme } from '../../themes/Theme';
+
+export default function SearchBar({ search, setSearch }) {
 
   return (
 
@@ -70,5 +73,3 @@ function SearchBar({ search, setSearch }) {
     </>
   );
 }
-
-export default SearchBar;

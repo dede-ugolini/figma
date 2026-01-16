@@ -1,10 +1,14 @@
 import { Theme } from "../themes/Theme";
-import { Box, Stack, Button } from "@mui/material";
-import NewTransection from "./transactions/NewTransection";
-import { useTransaction } from "../context/TransactionContext";
-import image from '../assets/image.png';
 
-function Header() {
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+
+import image from '../assets/image.png';
+import { useTransaction } from "../context/TransactionContext";
+import NewTransection from "./transactions/NewTransection";
+
+export default function Header() {
 
   const { setOpen } = useTransaction();
 
@@ -50,5 +54,3 @@ function Header() {
     </>
   )
 }
-
-export default Header;

@@ -1,6 +1,14 @@
-import { Stack, Button, Dialog, DialogContent, DialogTitle, TextField, Snackbar, Alert } from "@mui/material";
-import { useState } from 'react'
-import { Theme } from '../../themes/Theme.jsx'
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
+import { useState } from 'react';
+import { Theme } from '../../themes/Theme.jsx';
 
 export default function Register({ loginData, onRegister }) {
 

@@ -1,7 +1,16 @@
-import { Alert, Button, Dialog, Snackbar, Stack, TextField } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
+import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
+import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
+
 import { Theme } from "../../themes/Theme";
+
 import { useState } from "react";
-import { ArrowCircleUp, ArrowCircleDown } from "@mui/icons-material";
 import { useTransaction } from "../../context/TransactionContext";
 
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
