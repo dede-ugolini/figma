@@ -49,19 +49,12 @@ export default function SearchBar({ search, setSearch }) {
         }}>
           <Button
             variant="outlined"
-            disableElevation={true}
             sx={{
-              borderRadius: "10%",
-              backgroundColor: Theme.palette.secondary.main,
               height: "100%",
-              color: Theme.palette.primary.main,
-              fontSize: "14px",
               textTransform: "none",
-              "&:hover": {
-                backgroundColor: Theme.palette.primary.light,
+              ":hover": {
                 color: Theme.palette.primary.contrastText
-              },
-              border: 'none'
+              }
             }}
           >
             <SearchIcon></SearchIcon>
