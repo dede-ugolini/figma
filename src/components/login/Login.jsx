@@ -170,7 +170,7 @@ export default function Login() {
             Entrar
           </Button>
 
-
+          <Register />
         </Stack>
       </Stack>
 
