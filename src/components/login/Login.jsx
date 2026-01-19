@@ -12,7 +12,8 @@ import { useState } from 'react';
 import { Theme } from '../../themes/Theme.jsx';
 import Register from './Register.jsx';
 
-import loginApi from '../../api/login.json';
+import { login } from '../../service/post/login.js';
+
 
 //TODO: Implementar proteção de rota, para que usuário que não esteja logado não consiga acessar Main
 
@@ -25,9 +26,7 @@ export default function Login() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState('');
 
-  const [loginData, setLogin] = useState([...loginApi]);
-
-  const verify = () => {
+  const verify = async () => {
 
     if (user.length === 0 || password.length === 0) {
       console.log("Não é permitido user ou password vazio");
@@ -37,9 +36,9 @@ export default function Login() {
       return;
     }
 
-    const validUser = loginApi.find(index => index.login === user && index.senha === password);
-    if (validUser) {
-      console.log("Você está logado.");
+    const validUser = await login(user, password);
+
+    if (validUser === 200) {
       setMessage("Login bem sucedido!")
       setOpen(true);
       setSuccess(true);
@@ -48,9 +47,23 @@ export default function Login() {
       }, 1000);
 
     }
+
+    else if (validUser === 401) {
+      setMessage("Credenciais inválidas!");
+      setLogged(false)
+      setOpen(true);
+      setSuccess(false);
+    }
+
+    else if (validUser === 500) {
+      setMessage("Erro de servidor!");
+      setLogged(false)
+      setOpen(true);
+      setSuccess(false);
+    }
+
     else {
-      console.log("Usuário ou senha errados, digite novamente.");
-      setMessage("Usuário ou senha inválidos")
+      setMessage("Algum erro ocorreu, tente novamente mais tarde!");
       setLogged(false);
       setOpen(true);
       setSuccess(false);
@@ -60,10 +73,6 @@ export default function Login() {
   if (logged) {
     return <Navigate to={"/home"} />
   }
-
-  const handleRegister = (newData) => {
-    setLogin([...newData]);
-  };
 
   return (
     <Stack sx={{
@@ -161,10 +170,7 @@ export default function Login() {
             Entrar
           </Button>
 
-          <Register // Botão para registrar novo usuário
 
-            loginData={loginData} onRegister={handleRegister}
-          />
         </Stack>
       </Stack>
 
