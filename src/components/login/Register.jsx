@@ -10,7 +10,9 @@ import TextField from "@mui/material/TextField";
 import { useState } from 'react';
 import { Theme } from '../../themes/Theme.jsx';
 
-export default function Register({ loginData, onRegister }) {
+import { createUser } from "../../service/post/createUser.js";
+
+export default function Register() {
 
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState('');
@@ -26,7 +28,7 @@ export default function Register({ loginData, onRegister }) {
     setOpen(false);
   }
 
-  const register = () => {
+  const register = async () => {
 
     if (user.length === 0 || password.length === 0) {
       console.log("Não é permitido usuário ou senha vazios!");
@@ -36,27 +38,37 @@ export default function Register({ loginData, onRegister }) {
       return;
     }
 
-    const existingUser = loginData.find((index) => index.login === user && index.senha === password);
+    const existingUser = await createUser(user, password);
 
-    if (existingUser) {
-      console.log("Usuário já existente!");
-      console.log(loginData);
-      setMessage("Usuário já está cadastrado!");
-      setOpenAlert(true);
-      setSuccess(false);
-    }
-
-    else {
-      const newUser = { login: user, senha: password }
-      const newLoginData = loginData.concat(newUser);
-      onRegister(newLoginData);
-      console.log("Novo registro adicionado");
+    if (existingUser === 201) {
+      console.log("Usuário cadastrado com sucesso!");
       setMessage("Usuário cadastrado com sucesso!");
       setOpenAlert(true);
       setSuccess(true);
       setTimeout(() => {
         setOpen(false);
       }, 500);
+    }
+
+    else if (existingUser === 400) {
+      console.log("Usuário já existente!");
+      setMessage("Usuário já está cadastrado!");
+      setOpenAlert(true);
+      setSuccess(false);
+    }
+
+    else if (existingUser === 500) {
+      console.log("Erro interno de servidor");
+      setMessage("Erro interno de servidor!");
+      setOpenAlert(true);
+      setSuccess(false);
+    }
+
+    else {
+      console.log("ALgum erro ocorreu");
+      setMessage("Algum erro ocorreu, tente novamente mais tarde");
+      setOpenAlert(true);
+      setSuccess(false);
     }
   }
 
