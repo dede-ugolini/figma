@@ -103,8 +103,6 @@ export default function NewTransection() {
         type,
       }
 
-      addTransaction(transaction);
-
       clearTransaction();
       // Fecha o dialog
       setOpen(false);
