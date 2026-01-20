@@ -24,7 +24,9 @@ export default function Transactions({ transactions }) {
     setPage(0);
   }
 
-  const displayData = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const displayData = transactions;
+  console.log(displayData);
+  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <>
@@ -35,19 +37,28 @@ export default function Transactions({ transactions }) {
           <TableBody>
             {displayData.map((data) => (
               <TableRow key={data.id} >
+
+                <TableCell align="left" sx={{ // Célula que armazena data
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000"
+                }}
+                >{data.id}
+                </TableCell>
+
                 <TableCell sx={{ // Célula que armazena a descriçãp
                   color: Theme.palette.text.base,
                   borderBottom: "1px solid #000000"
                 }}
-                >{data.description}
+                >{data.nome}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena o preço
-                  color: data.type === 'saida' ? '#F75A68' : Theme.palette.primary.main,
+                  color: data.tipo === 'saida' ? '#F75A68' : Theme.palette.primary.main,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
-                >R$ {data.price.toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                >R$ {parseFloat(data.valor).toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena categoria
@@ -55,16 +66,9 @@ export default function Transactions({ transactions }) {
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
-                >{data.category}
+                >{data.categoria}
                 </TableCell>
 
-                <TableCell align="right" sx={{ // Célula que armazena data
-                  color: Theme.palette.text.base,
-                  fontWeight: 600,
-                  borderBottom: "1px solid #000000"
-                }}
-                >{data.date}
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
