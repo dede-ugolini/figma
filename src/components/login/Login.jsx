@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 
 import { useState } from 'react';
 
-import { Theme } from '../../themes/Theme.jsx';
+// import { Theme } from '../../themes/Theme.jsx';
 import Register from './Register.jsx';
 
 import { login } from '../../service/post/login.js';
@@ -81,7 +81,7 @@ export default function Login() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      color: Theme.palette.primary.contrastText,
+      // color: Theme.palette.primary.contrastText,
     }}
     >
       <Stack spacing={2} sx={{
@@ -106,20 +106,20 @@ export default function Login() {
           label={"Digite o nome de usuário"}
           onChange={(e) => setUser(e.target.value)}
           sx={{
-            backgroundColor: Theme.palette.secondary.light,
+            // backgroundColor: Theme.palette.secondary.light,
             borderRadius: "10px",
             '& .MuiInputBase-input': { // Cor do texto de input do usuário
-              color: Theme.palette.primary.contrastText,
+              // color: Theme.palette.primary.contrastText,
             },
             '& .MuiInputLabel-root': { // Cor do label do TextField
-              color: Theme.palette.primary.contrastText,
+              // color: Theme.palette.primary.contrastText,
             },
             '& .MuiOutlinedInput-root': {
               '&:hover fieldset': {
-                borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                // borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
               },
               '&.Mui-focused fieldset': {
-                borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                // borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
               },
             },
             input: { color: "" } // Aparentemente ao focar no TextField a cor do label não fica mais aquele azul padrão do MUI
@@ -134,20 +134,20 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           sx={{
             color: "secondary.main",
-            backgroundColor: Theme.palette.secondary.light,
+            // backgroundColor: Theme.palette.secondary.light,
             borderRadius: "10px",
             '& .MuiInputBase-input': { // Cor do texto de input do usuário
-              color: Theme.palette.primary.contrastText,
+              // color: Theme.palette.primary.contrastText,
             },
             '& .MuiInputLabel-root': { // Cor do label do TextField
-              color: Theme.palette.primary.contrastText,
+              // color: Theme.palette.primary.contrastText,
             },
             '& .MuiOutlinedInput-root': {
               '&:hover fieldset': {
-                borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                // borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
               },
               '&.Mui-focused fieldset': {
-                borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                // borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
               },
             },
             input: { color: "" }
@@ -160,10 +160,10 @@ export default function Login() {
           <Button // Botão para entrar
             onClick={verify}
             sx={{
-              color: Theme.palette.primary.contrastText,
-              backgroundColor: Theme.palette.primary.dark,
+              /*   color: Theme.palette.primary.contrastText,
+                backgroundColor: Theme.palette.primary.dark, */
               '&:hover': {
-                backgroundColor: Theme.palette.primary.main
+                // backgroundColor: Theme.palette.primary.main
               }
             }}
           >

@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Theme } from '../../themes/Theme';
+// import { Theme } from '../../themes/Theme';
 import { Paper } from "@mui/material";
 
 export default function SearchBar({ search, setSearch }) {
@@ -26,10 +26,10 @@ export default function SearchBar({ search, setSearch }) {
             variant="filled"
             sx={{
               '& .MuiInputLabel-root': { // Cor do label do TextField
-                color: Theme.palette.text.base,
+                // color: Theme.palette.text.base,
               },
               '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                color: Theme.palette.text.base,
+                // color: Theme.palette.text.base,
               },
             }}>
           </TextField>
@@ -43,7 +43,7 @@ export default function SearchBar({ search, setSearch }) {
               height: "100%",
               textTransform: "none",
               ":hover": {
-                color: Theme.palette.primary.contrastText
+                // color: Theme.palette.primary.contrastText
               }
             }}
           >

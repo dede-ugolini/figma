@@ -5,13 +5,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Stack } from "@mui/material";
+import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Stack, Paper } from "@mui/material";
 
 import { useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { Theme } from "../../themes/Theme";
+// import { Theme } from "../../themes/Theme";
 import { useTransaction } from "../../context/TransactionContext";
 import { deleteTransactions } from "../../service/delete/deleteTransactions";
 
@@ -69,7 +69,7 @@ export default function Transactions({ transactions }) {
 
   return (
     <>
-      <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree, width: "100%" }}>
+      <TableContainer component={Paper} sx={{/*  backgroundColor: Theme.palette.secondary.grayThree,  */width: "100%" }}>
         <Table size={dense ? "small" : "medium"} sx={{ minWidth: '80%' }}>
 
 
@@ -78,14 +78,14 @@ export default function Transactions({ transactions }) {
               <TableRow key={data.id} >
 
                 <TableCell sx={{ // Célula que armazena a descriçãp
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                   borderBottom: "1px solid #000000"
                 }}
                 >{data.nome}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena o preço
-                  color: data.tipo === 'saida' ? '#F75A68' : Theme.palette.primary.main,
+                  // color: data.tipo === 'saida' ? '#F75A68' : Theme.palette.primary.main,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
@@ -93,7 +93,7 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena categoria
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
@@ -101,7 +101,7 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={{
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
@@ -136,7 +136,7 @@ export default function Transactions({ transactions }) {
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
                 labelRowsPerPage={"Linhas por página"}
                 sx={{
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000",
                   paddingTop: 30,
