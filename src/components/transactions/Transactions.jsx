@@ -6,14 +6,13 @@ import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
-import { useState } from "react";
 import { Theme } from "../../themes/Theme";
+import { useTransaction } from "../../context/TransactionContext";
 
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const [page, setPage] = useState(0); // Diferente do componente Pagination, o componente TablePagination utiliza zero-based index, então a primeira pagina utiliza o index 0 e não 1 como em Pagination
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const { page, setPage, rowsPerPage, setRowsPerPage } = useTransaction();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -24,10 +23,6 @@ export default function Transactions({ transactions }) {
     setPage(0);
   }
 
-  const displayData = transactions;
-  console.log(displayData);
-  // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
   return (
     <>
       <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree, width: "100%" }}>
@@ -35,7 +30,7 @@ export default function Transactions({ transactions }) {
 
 
           <TableBody>
-            {displayData.map((data) => (
+            {transactions.map((data) => (
               <TableRow key={data.id} >
 
                 <TableCell align="left" sx={{ // Célula que armazena data
