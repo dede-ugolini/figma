@@ -11,7 +11,7 @@ export default function TransactionsContainer() {
   const [search, setSearch] = useState("");
   const { transactions, entradas, saidas } = useTransaction();
 
-  const filteredSearch = transactions.filter(t => t.description.toLowerCase().includes(search.toLowerCase()));
+  const filteredSearch = transactions.filter(t => t.nome.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <>

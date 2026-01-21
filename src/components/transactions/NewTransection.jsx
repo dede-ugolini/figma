@@ -14,10 +14,12 @@ import { useState } from "react";
 import { useTransaction } from "../../context/TransactionContext";
 import { Paper, Typography } from "@mui/material";
 
+import { createTransactions } from "../../service/post/createTransactions";
+
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
 
-  const { open, setOpen, addTransaction } = useTransaction();
+  const { open, setOpen, setAddTransaction } = useTransaction();
 
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -33,80 +35,93 @@ export default function NewTransection() {
     setOpen(false);
   }
 
-  function register() {
-    const data = new Date();
-    const day = String(data.getDate());
-    const month = String(data.getMonth() + 1);
-    const year = String(data.getFullYear());
-    const fomarmatedDate = `${day}/${month}/${year}`;
+  const clearTransaction = () => {
+    //Limpando os campos
+    setDescription("");
+    setPrice(Number(0));
+    setCategory("");
+    setType("");
+    setEntradaActive(false);
+    setSaidaActive(false);
+  }
 
-    const newTransaction = {
-      id: Date.now(),
-      description,
-      price: Number(price),
-      category,
-      type,
-      date: fomarmatedDate,
-    };
+  async function register() {
 
-    if (isNaN(newTransaction.price)) {
+    if (isNaN(price)) {
       setMessage("Por favor, digite um número válido!");
       setSuccess(false);
       setOpenAlert(true);
       return;
     }
 
-    if (newTransaction.description.length === 0) {
+    if (description.length === 0) {
       setMessage("Descrição não pode estar vazia");
       setSuccess(false);
       setOpenAlert(true);
       return;
     }
 
-    if (newTransaction.price === 0) {
+    if (price === 0) {
       setMessage("Preço precisa ser maior que zero!");
       setSuccess(false);
       setOpenAlert(true);
       return;
     }
 
-    if (newTransaction.price < 0) {
+    if (price < 0) {
       setMessage("Preço não pode ser valor negativo!");
       setSuccess(false);
       setOpenAlert(true);
       return;
     }
 
-    if (newTransaction.category.length === 0) {
+    if (category.length === 0) {
       setMessage("Categoria não pode estar vazia!");
       setSuccess(false);
       setOpenAlert(true);
       return;
     }
 
-    if (newTransaction.type.length === 0) {
+    if (type.length === 0) {
       setMessage("Transação precisa ser saída ou entrada");
       setSuccess(false);
       setOpenAlert(true);
       return;
     }
 
-    setMessage("Transação cadastrada com sucesso!");
-    setSuccess(true);
-    setOpenAlert(true);
+    const status = await createTransactions(description, price, category, type);
 
-    // Enviando o objeto de transação para o componente que me chamou.
-    addTransaction(newTransaction)
+    if (status === 201) {
+      setMessage("Transação realizada com sucesso!");
+      setSuccess(true);
+      setOpenAlert(true);
 
-    //Limpando os campos
-    setDescription("");
-    setPrice(0);
-    setCategory("");
-    setType("");
-    setEntradaActive(false);
-    setSaidaActive(false);
-    // Fecha o dialog
-    setOpen(false);
+      clearTransaction();
+
+      // Fecha o dialog
+      setOpen(false);
+
+      // Manda flag para o useEffect faz get das transações re-render da tabela de transações
+      setAddTransaction(true);
+    }
+
+    else if (status === 400) {
+      setMessage("Dados inválidos");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
+
+    else if (status === 401) {
+      setMessage("Não autorizado");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
+
+    else if (status === 500) {
+      setMessage("Erro interno de servidor!");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
   }
 
   const handleClickEntradas = () => {

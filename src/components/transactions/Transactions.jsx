@@ -6,14 +6,13 @@ import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
-import { useState } from "react";
 import { Theme } from "../../themes/Theme";
+import { useTransaction } from "../../context/TransactionContext";
 
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const [page, setPage] = useState(0); // Diferente do componente Pagination, o componente TablePagination utiliza zero-based index, então a primeira pagina utiliza o index 0 e não 1 como em Pagination
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const { page, setPage, rowsPerPage, setRowsPerPage } = useTransaction();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -24,8 +23,6 @@ export default function Transactions({ transactions }) {
     setPage(0);
   }
 
-  const displayData = transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
   return (
     <>
       <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree, width: "100%" }}>
@@ -33,21 +30,30 @@ export default function Transactions({ transactions }) {
 
 
           <TableBody>
-            {displayData.map((data) => (
+            {transactions.map((data) => (
               <TableRow key={data.id} >
+
+                <TableCell align="left" sx={{ // Célula que armazena data
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000"
+                }}
+                >{data.id}
+                </TableCell>
+
                 <TableCell sx={{ // Célula que armazena a descriçãp
                   color: Theme.palette.text.base,
                   borderBottom: "1px solid #000000"
                 }}
-                >{data.description}
+                >{data.nome}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena o preço
-                  color: data.type === 'saida' ? '#F75A68' : Theme.palette.primary.main,
+                  color: data.tipo === 'saida' ? '#F75A68' : Theme.palette.primary.main,
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
-                >R$ {data.price.toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                >R$ {parseFloat(data.valor).toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena categoria
@@ -55,16 +61,9 @@ export default function Transactions({ transactions }) {
                   fontWeight: 600,
                   borderBottom: "1px solid #000000"
                 }}
-                >{data.category}
+                >{data.categoria}
                 </TableCell>
 
-                <TableCell align="right" sx={{ // Célula que armazena data
-                  color: Theme.palette.text.base,
-                  fontWeight: 600,
-                  borderBottom: "1px solid #000000"
-                }}
-                >{data.date}
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
