@@ -19,7 +19,7 @@ import { createTransactions } from "../../service/post/createTransactions";
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
 
-  const { open, setOpen, addTransaction } = useTransaction();
+  const { open, setOpen, setAddTransaction } = useTransaction();
 
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -96,18 +96,13 @@ export default function NewTransection() {
       setSuccess(true);
       setOpenAlert(true);
 
-      const transaction = {
-        description,
-        price,
-        category,
-        type,
-      }
-
-      addTransaction(transaction);
-
       clearTransaction();
+
       // Fecha o dialog
       setOpen(false);
+
+      // Manda flag para o useEffect faz get das transações re-render da tabela de transações
+      setAddTransaction(true);
     }
 
     else if (status === 400) {
