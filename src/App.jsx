@@ -1,16 +1,19 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import { Theme } from "./themes/Theme.jsx"
-import { ThemeProvider } from '@emotion/react';
+
+import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 
 import Login from './components/login/Login.jsx'
 import Main from './components/Main.jsx'
 import { CssBaseline } from '@mui/material';
 
+let theme = responsiveFontSizes(Theme);
+
 function App() {
 
   return (
-    <ThemeProvider theme={Theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <Routes>

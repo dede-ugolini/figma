@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 
 export const Theme = createTheme({
   palette: {
@@ -22,7 +22,7 @@ export const Theme = createTheme({
     },
     background: {
       default: "#202024",
-      paper: "#000000",
+      paper: "#121214",
     },
   },
 
@@ -58,8 +58,22 @@ export const Theme = createTheme({
       lineHeight: 1.6,
     },
 
-    h6: { fontSize: '20px', fontWeight: 700, lineHeight: 1.6 },
-    h5: { fontSize: '24px', fontWeight: 700, lineHeight: 1.6 },
-    h4: { fontSize: '32px', fontWeight: 700, lineHeight: 1.6 },
+    h1: {
+      fontSize: "16px", // xs (default)
+
+      '@media (min-width:600px)': {
+        fontSize: "24px",
+      },
+      '@media (min-width:900px)': {
+        fontSize: "32px",
+      },
+      '@media (min-width:1200px)': {
+        fontSize: "40px",
+      },
+    },
+
+    h3: {
+    }
+
   }
 });
