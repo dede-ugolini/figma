@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Tooltip } from "@mui/material";
+import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Stack } from "@mui/material";
 
 import { useState } from 'react'
 
@@ -23,6 +23,7 @@ export default function Transactions({ transactions }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [dense, setDense] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -69,7 +70,7 @@ export default function Transactions({ transactions }) {
   return (
     <>
       <TableContainer sx={{ backgroundColor: Theme.palette.secondary.grayThree, width: "100%" }}>
-        <Table sx={{ minWidth: '80%' }}>
+        <Table size={dense ? "small" : "medium"} sx={{ minWidth: '80%' }}>
 
 
           <TableBody>
@@ -125,24 +126,37 @@ export default function Transactions({ transactions }) {
           <TableFooter sx={{
             paddingTop: 100
           }}>
-            <TablePagination // Componente que faz a paginação das transações
-              count={totalPages}
-              page={page}
-              onPageChange={handleChangePage}
-              rowsPerPage={rowsPerPage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              rowsPerPageOptions={[5, 10, 20, 50, 100]}
-              labelRowsPerPage={"Linhas por página"}
-              sx={{
-                color: Theme.palette.text.base,
-                fontWeight: 600,
-                borderBottom: "1px solid #000000",
-                paddingTop: 30,
-              }}
-            >
-            </TablePagination>
+            <TableRow>
+              <TablePagination // Componente que faz a paginação das transações
+                count={totalPages}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                labelRowsPerPage={"Linhas por página"}
+                sx={{
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000",
+                  paddingTop: 30,
+                }}
+              >
+              </TablePagination>
+            </TableRow>
           </TableFooter>
         </Table>
+
+        <FormControlLabel
+          label="Agrupar tabela"
+          control={<Switch checked={dense} onChange={() => setDense(!dense)} />}
+          sx={{
+            display: "flex",
+            justifyContent: "right"
+          }}
+        >
+        </FormControlLabel>
+
       </TableContainer>
 
       <Snackbar // Em caso de erro
