@@ -5,14 +5,24 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { Alert, IconButton, Snackbar, Tooltip } from "@mui/material";
+
+import { useState } from 'react'
+
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Theme } from "../../themes/Theme";
 import { useTransaction } from "../../context/TransactionContext";
+import { deleteTransactions } from "../../service/delete/deleteTransactions";
 
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const { page, setPage, rowsPerPage, setRowsPerPage, totalPages } = useTransaction();
+  const { page, setPage, rowsPerPage, setRowsPerPage, totalPages, setAddTransaction } = useTransaction();
+
+  const [openAlert, setOpenAlert] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -21,6 +31,41 @@ export default function Transactions({ transactions }) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  }
+
+  const handleDelete = async (id) => {
+    const status = await deleteTransactions(id);
+
+    if (status === 200) {
+      setMessage("Transação deletada com sucesso!");
+      setSuccess(true);
+      setOpenAlert(true);
+      setTimeout(() => {
+        setAddTransaction(true);
+      }, 1000);
+
+      setAddTransaction(true);
+    }
+    else if (status === 401) {
+      setMessage("Não autorizado!");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
+    else if (status === 404) {
+      setMessage("Transação não encontrada!");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
+    else if (status === 500) {
+      setMessage("Erro interno de servidor, tente novamente mais tarde");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
+    else {
+      setMessage("Algum erro ocorreu, tente novamente mais tarde!");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
   }
 
   return (
@@ -32,14 +77,6 @@ export default function Transactions({ transactions }) {
           <TableBody>
             {transactions.map((data) => (
               <TableRow key={data.id} >
-
-                <TableCell align="left" sx={{ // Célula que armazena data
-                  color: Theme.palette.text.base,
-                  fontWeight: 600,
-                  borderBottom: "1px solid #000000"
-                }}
-                >{data.id}
-                </TableCell>
 
                 <TableCell sx={{ // Célula que armazena a descriçãp
                   color: Theme.palette.text.base,
@@ -64,6 +101,16 @@ export default function Transactions({ transactions }) {
                 >{data.categoria}
                 </TableCell>
 
+                <TableCell align="right" sx={{ // Célula que armezana botão para fazer delete
+                  borderBottom: "1px solid #000000"
+                }}>
+                  <IconButton onClick={() => handleDelete(data.id)}>
+                    <Tooltip title={"Deletar transação"}>
+                      <DeleteIcon sx={{ color: "#F75A68" }} />
+                    </Tooltip>
+                  </IconButton>
+                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
@@ -77,7 +124,7 @@ export default function Transactions({ transactions }) {
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              rowsPerPageOptions={[5, 10, 20]}
+              rowsPerPageOptions={[5, 10, 20, 50, 100]}
               labelRowsPerPage={"Linhas por página"}
               sx={{
                 color: Theme.palette.text.base,
@@ -90,6 +137,34 @@ export default function Transactions({ transactions }) {
           </TableFooter>
         </Table>
       </TableContainer>
+
+      <Snackbar // Em caso de erro
+        open={openAlert && !success}
+        autoHideDuration={2000}
+        onClose={() => setOpenAlert(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>
+          {message}
+        </Alert>
+      </Snackbar>
+
+      <Snackbar // Em caso de sucesso
+        open={openAlert && success}
+        autoHideDuration={2000}
+        onClose={() => setOpenAlert(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
