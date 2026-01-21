@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 
 import { getTransactions } from "../service/get/getTransactions";
+import { getTotalPages } from "../service/get/getTotalPages.js"
 
 export const TransactionContext = createContext();
 
@@ -12,6 +13,7 @@ export function TransactionProvider({ children }) {
   const [open, setOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [addTransaction, setAddTransaction] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
 
   const { entradas, saidas } = useMemo(() => {
 
@@ -32,11 +34,18 @@ export function TransactionProvider({ children }) {
 
   useEffect(() => {
     async function fetchTransactions() {
-      const fetchData = await getTransactions(page, rowsPerPage);
-      setTransactions(fetchData);
-
+      const fetchedTransactions = await getTransactions(page + 1, rowsPerPage);
+      setTransactions(fetchedTransactions);
     }
+
+    async function fetchTotalPages() {
+      const fetchedTotalPages = await getTotalPages();
+      setTotalPages(fetchedTotalPages);
+    }
+
     fetchTransactions();
+    fetchTotalPages();
+
     // Função de cleanup depois de uma transação ser enviada para api, talvez tenha jeito melhor de fazer
     return () => {
       setAddTransaction(false);
@@ -56,6 +65,7 @@ export function TransactionProvider({ children }) {
         setPage,
         rowsPerPage,
         setRowsPerPage,
+        totalPages,
         setAddTransaction,
       }}
     >

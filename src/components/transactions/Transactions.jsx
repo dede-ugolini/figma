@@ -12,7 +12,7 @@ import { useTransaction } from "../../context/TransactionContext";
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const { page, setPage, rowsPerPage, setRowsPerPage } = useTransaction();
+  const { page, setPage, rowsPerPage, setRowsPerPage, totalPages } = useTransaction();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -72,7 +72,7 @@ export default function Transactions({ transactions }) {
             paddingTop: 100
           }}>
             <TablePagination // Componente que faz a paginação das transações
-              count={transactions.length}
+              count={totalPages}
               page={page}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}
