@@ -99,6 +99,15 @@ export default function Transactions({ transactions }) {
                 >{data.categoria}
                 </TableCell>
 
+                <TableCell align="right" sx={{
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000"
+                }}
+                >
+                  {new Date(data.data).toLocaleDateString("pt-br")}
+                </TableCell>
+
                 <TableCell align="right" sx={{ // Célula que armezana botão para fazer delete
                   borderBottom: "1px solid #000000"
                 }}>
