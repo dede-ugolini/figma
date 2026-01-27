@@ -20,14 +20,19 @@ export function TransactionProvider({ children }) {
     let entradas = 0;
     let saidas = 0;
 
-    transactions.forEach((element) => {
-      if (element.tipo === "entrada") {
-        entradas += element.valor;
-      }
-      else {
-        saidas += element.valor;
-      }
-    });
+    if (transactions !== undefined) {
+      transactions.forEach((element) => {
+        if (element.tipo === "entrada") {
+          entradas += element.valor;
+        }
+        else {
+          saidas += element.valor;
+        }
+      });
+    }
+    else {
+      console.log("Transacations is:" + typeof transactions);
+    }
 
     return { entradas, saidas }
   }, [transactions])
@@ -35,16 +40,31 @@ export function TransactionProvider({ children }) {
   useEffect(() => {
     async function fetchTransactions() {
       const fetchedTransactions = await getTransactions(page + 1, rowsPerPage);
-      setTransactions(fetchedTransactions);
+      if (fetchedTransactions !== undefined) {
+        setTransactions(fetchedTransactions);
+      }
+      else {
+        console.log("fetchedTransactions is: " + typeof fetchedTransactions);
+      }
     }
 
     async function fetchTotalPages() {
       const fetchedTotalPages = await getTotalPages();
-      setTotalPages(fetchedTotalPages);
+      if (fetchedTotalPages !== undefined) {
+        setTotalPages(fetchedTotalPages);
+      }
+      else {
+        console.log("fetchTotalPages is: " + typeof fetchedTotalPages)
+      }
     }
 
-    fetchTransactions();
-    fetchTotalPages();
+    try {
+      fetchTransactions();
+      fetchTotalPages();
+    } catch (error) {
+      console.log(error);
+    }
+
 
     // Função de cleanup depois de uma transação ser enviada para api, talvez tenha jeito melhor de fazer
     return () => {

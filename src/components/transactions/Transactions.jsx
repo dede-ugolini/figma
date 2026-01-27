@@ -123,9 +123,7 @@ export default function Transactions({ transactions }) {
             ))}
           </TableBody>
 
-          <TableFooter sx={{
-            paddingTop: 100
-          }}>
+          <TableFooter>
             <TableRow>
               <TablePagination // Componente que faz a paginação das transações
                 count={totalPages}
@@ -136,7 +134,7 @@ export default function Transactions({ transactions }) {
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
                 labelRowsPerPage={"Linhas por página"}
                 sx={{
-                  // color: Theme.palette.text.base,
+                  color: "#FFF",
                   fontWeight: 600,
                   borderBottom: "1px solid #000000",
                   paddingTop: 30,
