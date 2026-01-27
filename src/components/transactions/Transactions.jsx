@@ -122,25 +122,25 @@ export default function Transactions({ transactions }) {
             ))}
           </TableBody>
 
-          <TableFooter sx={{
-            paddingTop: 100
-          }}>
-            <TablePagination // Componente que faz a paginação das transações
-              count={totalPages}
-              page={page}
-              onPageChange={handleChangePage}
-              rowsPerPage={rowsPerPage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              rowsPerPageOptions={[5, 10, 20, 50, 100]}
-              labelRowsPerPage={"Linhas por página"}
-              sx={{
-                color: Theme.palette.text.base,
-                fontWeight: 600,
-                borderBottom: "1px solid #000000",
-                paddingTop: 30,
-              }}
-            >
-            </TablePagination>
+          <TableFooter>
+            <TableRow>
+              <TablePagination // Componente que faz a paginação das transações
+                count={totalPages}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                rowsPerPageOptions={[5, 10, 20, 50, 100]}
+                labelRowsPerPage={"Linhas por página"}
+                sx={{
+                  color: Theme.palette.text.base,
+                  fontWeight: 600,
+                  borderBottom: "1px solid #000000",
+                  paddingTop: 30,
+                }}
+              >
+              </TablePagination>
+            </TableRow>
           </TableFooter>
         </Table>
       </TableContainer>
