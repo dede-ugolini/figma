@@ -7,10 +7,14 @@ export const login = async (user, password) => {
       "login": user,
       "senha": password
     }
-    const response = await api.post("/api/login", json);
+    const response = await api.post("/api/login", json, {
+      skipAuthLogin: true,
+    });
 
     const token = response.data.token;
+    const refreshToken = response.data.refreshToken;
     localStorage.setItem("token", token);
+    localStorage.setItem("refreshToken", refreshToken);
 
     return response.status;
 
