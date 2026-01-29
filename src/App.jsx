@@ -9,6 +9,8 @@ import { CssBaseline } from '@mui/material';
 
 function App() {
 
+  const token = localStorage.getItem("token");
+
   return (
     <ThemeProvider theme={Theme}>
       <CssBaseline />
