@@ -12,16 +12,16 @@ export default function Header() {
 
   return (
     <>
-      <Box sx={{
+      <Box sx={(theme) => ({
         width: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#121214"
-      }}>
+        background: theme.palette.background.header
+      })}>
         <Box sx={{
           width: '80%',
-          minHeight: '180px',
+          minHeight: '20vh',
           display: "flex",
           justifyContent: "space-between",
           alignItems: 'center'
@@ -34,7 +34,6 @@ export default function Header() {
               onClick={() => setOpen(true)}
               color="primary"
               variant="contained"
-              sx={{ textTransform: "none" }}
             >
               Nova transação
             </Button>

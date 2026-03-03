@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 
-import { Theme } from "../../themes/Theme";
+// import { Theme } from "../../themes/Theme";
 
 import { useState } from "react";
 import { useTransaction } from "../../context/TransactionContext";
@@ -152,7 +152,7 @@ export default function NewTransection() {
             width: "350px",
             height: "450px"
           }}>
-            <h4 style={{ color: Theme.palette.primary.contrastText }}>Nova Transação</h4>
+            <h4 style={{/*  color: Theme.palette.primary.contrastText  */ }}>Nova Transação</h4>
 
             <TextField // Textfield que coleta o input de descrição
               component={Paper}
@@ -163,10 +163,10 @@ export default function NewTransection() {
               onChange={(e) => setDescription(e.target.value)}
               sx={{
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                 },
               }}
             >
@@ -180,10 +180,10 @@ export default function NewTransection() {
               placeholder="Preço do produto"
               sx={{
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                 },
               }}
             />
@@ -196,10 +196,10 @@ export default function NewTransection() {
               onChange={(e) => setCategory(e.target.value)}
               sx={{
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  color: Theme.palette.text.base,
+                  // color: Theme.palette.text.base,
                 },
               }}
             />
@@ -214,8 +214,8 @@ export default function NewTransection() {
                 sx={{
                   width: "50%",
                   borderRadius: "9px",
-                  backgroundColor: entradaActive ? "primary.main" : Theme.palette.secondary.main,
-                  color: Theme.palette.primary.contrastText,
+                  // backgroundColor: entradaActive ? "primary.main" : Theme.palette.secondary.main,
+                  // color: Theme.palette.primary.contrastText,
                   ":hover": {
                     backgroundColor: entradaActive ? "primary.main" : "secondary.light",
                   },
@@ -229,8 +229,8 @@ export default function NewTransection() {
                 sx={{
                   width: "50%",
                   borderRadius: "9px",
-                  backgroundColor: saidaActive ? "#AA2834" : Theme.palette.secondary.main,
-                  color: Theme.palette.primary.contrastText,
+                  // backgroundColor: saidaActive ? "#AA2834" : Theme.palette.secondary.main,
+                  // color: Theme.palette.primary.contrastText,
                   ":hover": {
                     backgroundColor: saidaActive ? "#AA2834" : "secondary.light",
                   },
@@ -256,9 +256,9 @@ export default function NewTransection() {
           sx={{
             position: "absolute",
             alignSelf: "flex-end",
-            color: Theme.palette.text.base,
+            // color: Theme.palette.text.base,
             ":hover": {
-              backgroundColor: Theme.palette.primary.main
+              // backgroundColor: Theme.palette.primary.main
             }
           }}
         >X</Button>

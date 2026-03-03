@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
 import { useState } from 'react';
-import { Theme } from '../../themes/Theme.jsx';
+// import { Theme } from '../../themes/Theme.jsx';
 
 import { createUser } from "../../service/post/createUser.js";
 
@@ -75,24 +75,24 @@ export default function Register() {
   return (
     <>
       <Button onClick={handleClickOpen} sx={{
-        color: Theme.palette.primary.contrastText,
-        backgroundColor: Theme.palette.primary.dark,
+        /* color: Theme.palette.primary.contrastText,
+        backgroundColor: Theme.palette.primary.dark, */
         ":hover": {
-          backgroundColor: Theme.palette.primary.main
+          // backgroundColor: Theme.palette.primary.main
         }
       }}>Cadastrar
       </Button>
 
       <Dialog open={open} onClose={handleClickClose} sx={{
         "& .MuiDialog-paper": { // Precisa alterar essa classe para alterar todo o background, inclusive aquela borda desgraçada que não mudava de cor
-          backgroundColor: Theme.palette.secondary.light
+          // backgroundColor: Theme.palette.secondary.light
         }
       }}>
         <Stack spacing={2} sx={{
           margin: "20px",
           width: '450px',
           height: "450px",
-          color: Theme.palette.primary.contrastText
+          // color: Theme.palette.primary.contrastText
         }}>
           <DialogContent>
             <DialogTitle>
@@ -100,8 +100,8 @@ export default function Register() {
               <Button // Botão para fechar dialog do cadastro
                 onClick={handleClickClose}
                 sx={{
-                  position: "absolute", right: 8, top: 8, color: Theme.palette.primary.contrastText, backgroundColor: Theme.palette.primary.dark,
-                  ":hover": { backgroundColor: Theme.palette.primary.light }
+                  // position: "absolute", right: 8, top: 8, color: Theme.palette.primary.contrastText, backgroundColor: Theme.palette.primary.dark,
+                  // ":hover": { backgroundColor: Theme.palette.primary.light }
                 }}
               >
                 X
@@ -113,20 +113,20 @@ export default function Register() {
                 label={"Digite o nome de usuario"}
                 onChange={(e) => setUser(e.target.value)}
                 sx={{
-                  backgroundColor: Theme.palette.secondary.light,
+                  // backgroundColor: Theme.palette.secondary.light,
                   borderRadius: "10px",
                   '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                    color: Theme.palette.primary.contrastText,
+                    // color: Theme.palette.primary.contrastText,
                   },
                   '& .MuiInputLabel-root': { // Cor do label do TextField
-                    color: Theme.palette.primary.contrastText,
+                    // color: Theme.palette.primary.contrastText,
                   },
                   '& .MuiOutlinedInput-root': {
                     '&:hover fieldset': {
-                      borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                      // borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                      // borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
                     },
                   },
                   input: { color: "" }
@@ -138,20 +138,20 @@ export default function Register() {
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 sx={{
-                  backgroundColor: Theme.palette.secondary.light,
+                  // backgroundColor: Theme.palette.secondary.light,
                   borderRadius: "10px",
                   '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                    color: Theme.palette.primary.contrastText,
+                    // color: Theme.palette.primary.contrastText,
                   },
                   '& .MuiInputLabel-root': { // Cor do label do TextField
-                    color: Theme.palette.primary.contrastText,
+                    // color: Theme.palette.primary.contrastText,
                   },
                   '& .MuiOutlinedInput-root': {
                     '&:hover fieldset': {
-                      borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
+                      // borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
+                      // borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
                     },
                   },
                   input: { color: ""/* Theme.palette.primary.contrastText  */ }
@@ -160,10 +160,10 @@ export default function Register() {
               <Button // Botão que faz o envio dos dados do novo usuário para cadastrar
                 onClick={register}
                 sx={{
-                  color: Theme.palette.primary.contrastText,
-                  backgroundColor: Theme.palette.primary.dark,
+                  // color: Theme.palette.primary.contrastText,
+                  // backgroundColor: Theme.palette.primary.dark,
                   '&:hover': {
-                    backgroundColor: Theme.palette.primary.main
+                    // backgroundColor: Theme.palette.primary.main
                   }
                 }}>
                 Confirmar
