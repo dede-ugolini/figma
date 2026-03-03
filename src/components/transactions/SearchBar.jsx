@@ -19,17 +19,16 @@ export default function SearchBar({ search, setSearch }) {
           paddingRight: "1%",
         }}>
           <TextField
-            component={Paper}
             label={"Busque uma Transação"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             variant="filled"
             sx={{
               '& .MuiInputLabel-root': { // Cor do label do TextField
-                // color: Theme.palette.text.base,
+                color: "text.base",
               },
               '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                // color: Theme.palette.text.base,
+                color: "text.base",
               },
             }}>
           </TextField>
@@ -43,7 +42,7 @@ export default function SearchBar({ search, setSearch }) {
               height: "100%",
               textTransform: "none",
               ":hover": {
-                // color: Theme.palette.primary.contrastText
+                color: "primary.contrastText"
               }
             }}
           >
