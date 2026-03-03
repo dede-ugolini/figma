@@ -6,16 +6,15 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import { CssBaseline, Paper, ThemeProvider } from '@mui/material';
 
 import { useState } from 'react';
 
-// import { Theme } from '../../themes/Theme.jsx';
 import Register from './Register.jsx';
 
 import { login } from '../../service/post/login.js';
 
-
-//TODO: Implementar proteção de rota, para que usuário que não esteja logado não consiga acessar Main
+import { darkTheme } from "../../themes/Theme.jsx"
 
 export default function Login() {
 
@@ -75,24 +74,24 @@ export default function Login() {
   }
 
   return (
-    <Stack sx={{
-      width: '100%',
-      height: '80vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      // color: Theme.palette.primary.contrastText,
-    }}
-    >
-      <Stack spacing={2} sx={{
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Stack sx={{
+        width: '100%',
+        height: '80vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <Stack>
-          <h1>Login</h1>
-        </Stack>
-        { /*Para aprender de vez: 
+        alignItems: 'center',
+        // color: Theme.palette.primary.contrastText,
+      }}
+      >
+        <Stack component={Paper} p={5} sx={{
+          alignItems: 'center'
+        }}>
+          <Stack>
+            <h1>Login</h1>
+          </Stack>
+          { /*Para aprender de vez: 
           Componentes não herdam props, apenas CSS, então se eu fazer <Stack spacing={2}><Stack>Está Stack não herda spacing 2</Stack></Stack>
           Então se eu declarar na primeira Stack color: primary.main todos os componentes filhos devem herdar? Nem sempre
           Alguns componentes como TextField não herda porque é um componente composto por outros componentes como FormControl, InputLabel,OutlinedInput/InputBase
@@ -101,109 +100,69 @@ export default function Login() {
            color: Theme.palette.primary.contrastText,
          }
         */
-        }
-        <TextField
-          label={"Digite o nome de usuário"}
-          onChange={(e) => setUser(e.target.value)}
-          sx={{
-            // backgroundColor: Theme.palette.secondary.light,
-            borderRadius: "10px",
-            '& .MuiInputBase-input': { // Cor do texto de input do usuário
-              // color: Theme.palette.primary.contrastText,
-            },
-            '& .MuiInputLabel-root': { // Cor do label do TextField
-              // color: Theme.palette.primary.contrastText,
-            },
-            '& .MuiOutlinedInput-root': {
-              '&:hover fieldset': {
-                // borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
-              },
-              '&.Mui-focused fieldset': {
-                // borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
-              },
-            },
-            input: { color: "" } // Aparentemente ao focar no TextField a cor do label não fica mais aquele azul padrão do MUI
-          }}
-        >
-        </TextField>
+          }
+          <Stack spacing={2}>
+            <TextField
+              label={"Digite o nome de usuário"}
+              onChange={(e) => setUser(e.target.value)}
+            >
+            </TextField>
 
-        <TextField // Text field que coleta input de senha do usuario
-          label={"Digite a senha do usuario"}
-          type='password'
-          // required={true}
-          onChange={(e) => setPassword(e.target.value)}
-          sx={{
-            color: "secondary.main",
-            // backgroundColor: Theme.palette.secondary.light,
-            borderRadius: "10px",
-            '& .MuiInputBase-input': { // Cor do texto de input do usuário
-              // color: Theme.palette.primary.contrastText,
-            },
-            '& .MuiInputLabel-root': { // Cor do label do TextField
-              // color: Theme.palette.primary.contrastText,
-            },
-            '& .MuiOutlinedInput-root': {
-              '&:hover fieldset': {
-                // borderColor: Theme.palette.primary.contrastText, // Cor do TextField ao passar o mouse
-              },
-              '&.Mui-focused fieldset': {
-                // borderColor: Theme.palette.secondary.grayThree, // Cor do TextField ao clicá-lo
-              },
-            },
-            input: { color: "" }
-          }}
-        >
-        </TextField>
+            <TextField // Text field que coleta input de senha do usuario
+              label={"Digite a senha do usuario"}
+              type='password'
+              onChange={(e) => setPassword(e.target.value)}
+            >
+            </TextField>
+          </Stack>
 
-        <Stack spacing={2} direction={'row'} sx={{
-        }}>
-          <Button // Botão para entrar
-            onClick={verify}
-            sx={{
-              /*   color: Theme.palette.primary.contrastText,
-                backgroundColor: Theme.palette.primary.dark, */
-              '&:hover': {
-                // backgroundColor: Theme.palette.primary.main
-              }
-            }}
-          >
-            Entrar
-          </Button>
 
-          <Register />
+          <Stack spacing={2} direction={'row'} sx={{
+            paddingTop: 5
+          }}>
+            <Button // Botão para entrar
+              variant='contained'
+              onClick={verify}
+            >
+              Entrar
+            </Button>
+
+            <Register />
+          </Stack>
         </Stack>
+
+        <Snackbar // Snackbar em caso de falha de login
+          open={open && !success}
+          autoHideDuration={6000}
+          onClose={() => setOpen(false)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
+        >
+          <Alert variant='filled' severity='error' onClose={() => setOpen(false)}>
+            <AlertTitle>Atenção!</AlertTitle>
+            {message}
+          </Alert>
+        </Snackbar>
+
+        <Snackbar // Snackbar em caso de sucesso de login
+          open={open && success}
+          autoHideDuration={6000}
+          onClose={() => setOpen(false)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
+        >
+          <Alert variant='filled' severity='success' onClose={() => setOpen(false)}>
+            <AlertTitle>Bem vindo!</AlertTitle>
+            {message}
+          </Alert>
+        </Snackbar>
       </Stack>
+    </ThemeProvider>
 
-      <Snackbar // Snackbar em caso de falha de login
-        open={open && !success}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center"
-        }}
-      >
-        <Alert variant='filled' severity='error' onClose={() => setOpen(false)}>
-          <AlertTitle>Atenção!</AlertTitle>
-          {message}
-        </Alert>
-      </Snackbar>
-
-      <Snackbar // Snackbar em caso de sucesso de login
-        open={open && success}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center"
-        }}
-      >
-        <Alert variant='filled' severity='success' onClose={() => setOpen(false)}>
-          <AlertTitle>Bem vindo!</AlertTitle>
-          {message}
-        </Alert>
-      </Snackbar>
-    </Stack>
   )
 
 }

@@ -74,7 +74,7 @@ export default function Register() {
 
   return (
     <>
-      <Button onClick={handleClickOpen} sx={{
+      <Button onClick={handleClickOpen} variant={"contained"} sx={{
         /* color: Theme.palette.primary.contrastText,
         backgroundColor: Theme.palette.primary.dark, */
         ":hover": {
