@@ -26,11 +26,9 @@ export default function Main() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            //color: Theme.palette.primary.contrastText,
           }}
           >
             <Stack sx={{ // Stack do Cabeçalho
-              height: "20vh",
               width: "100%"
             }}>
               <Header />
@@ -38,7 +36,7 @@ export default function Main() {
 
             <Stack spacing={5} sx={{ // Stack que armazena os 3 cards de saldo e a o container que guarda a barra de pesquisa e transações.
               position: 'relative',
-              top: '-3rem',
+              top: '-5vh',
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -46,9 +44,6 @@ export default function Main() {
             }}>
               <TransactionContainer />
             </Stack>
-
-            <Button variant='contained'>Hello</Button>
-
             <Footer setDark={setDarkMode} />
           </Stack>
         </TransactionProvider>

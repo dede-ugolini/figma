@@ -23,14 +23,15 @@ export default function SearchBar({ search, setSearch }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             variant="filled"
-            sx={{
+            sx={(theme) => ({
               '& .MuiInputLabel-root': { // Cor do label do TextField
                 color: "text.base",
               },
               '& .MuiInputBase-input': { // Cor do texto de input do usuário
                 color: "text.base",
               },
-            }}>
+              background: theme.palette.background
+            })}>
           </TextField>
         </Stack>
         <Stack sx={{
