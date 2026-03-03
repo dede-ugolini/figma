@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper } from "@mui/material";
+import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
 
 import { useState } from 'react'
 
@@ -76,33 +76,28 @@ export default function Transactions({ transactions }) {
             {transactions.map((data) => (
               <TableRow key={data.id} >
 
-                <TableCell sx={{ // Célula que armazena a descriçãp
-                  color: "text.base",
-                  fontWeight: 400,
-                }}
-                >{data.nome}
+                <TableCell> {/* Célula que armazena o nome da transação*/}
+                  <Typography color="text.base">
+                    {data.nome}
+                  </Typography>
                 </TableCell>
 
-                <TableCell align="right" sx={{ // Célula que armazena o preço
-                  color: data.tipo === 'saida' ? '#F75A68' : "primary.main",
-                  fontWeight: 400,
-                }}
-                >R$ {parseFloat(data.valor).toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                <TableCell align="right">
+                  <Typography color={data.tipo === 'saida' ? '#F75A68' : "primary.main"}> {/* Célula que armazena o preço */}
+                    R$ {parseFloat(data.valor).toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </Typography>
                 </TableCell>
 
-                <TableCell align="right" sx={{ // Célula que armazena categoria
-                  color: "text.base",
-                  fontWeight: 400,
-                }}
-                >{data.categoria}
+                <TableCell align="right"> {/* Célula que armazena a categoria */}
+                  <Typography color="text.base">
+                    {data.categoria}
+                  </Typography>
                 </TableCell>
 
-                <TableCell align="right" sx={{
-                  color: "text.base",
-                  fontWeight: 400,
-                }}
-                >
-                  {new Date(data.data).toLocaleDateString("pt-br")}
+                <TableCell align="right">
+                  <Typography color="text.base">
+                    {new Date(data.data).toLocaleDateString("pt-br")}
+                  </Typography>
                 </TableCell>
 
                 <TableCell align="right">
@@ -140,7 +135,7 @@ export default function Transactions({ transactions }) {
         </Table>
 
         <FormControlLabel
-          label="Agrupar tabela"
+          label="Agrupar"
           control={<Switch checked={dense} onChange={() => setDense(!dense)} />}
           sx={{
             display: "flex",
