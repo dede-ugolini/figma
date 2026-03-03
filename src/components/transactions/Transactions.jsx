@@ -5,13 +5,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Stack, Paper } from "@mui/material";
+import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper } from "@mui/material";
 
 import { useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
-// import { Theme } from "../../themes/Theme";
 import { useTransaction } from "../../context/TransactionContext";
 import { deleteTransactions } from "../../service/delete/deleteTransactions";
 
@@ -25,7 +24,7 @@ export default function Transactions({ transactions }) {
   const [success, setSuccess] = useState(false);
   const [dense, setDense] = useState(false);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage) => {
     setPage(newPage);
   };
 
@@ -78,40 +77,35 @@ export default function Transactions({ transactions }) {
               <TableRow key={data.id} >
 
                 <TableCell sx={{ // Célula que armazena a descriçãp
-                  // color: Theme.palette.text.base,
-                  borderBottom: "1px solid #000000"
+                  color: "text.base",
+                  fontWeight: 400,
                 }}
                 >{data.nome}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena o preço
-                  // color: data.tipo === 'saida' ? '#F75A68' : Theme.palette.primary.main,
-                  fontWeight: 600,
-                  borderBottom: "1px solid #000000"
+                  color: data.tipo === 'saida' ? '#F75A68' : "primary.main",
+                  fontWeight: 400,
                 }}
                 >R$ {parseFloat(data.valor).toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </TableCell>
 
                 <TableCell align="right" sx={{ // Célula que armazena categoria
-                  // color: Theme.palette.text.base,
-                  fontWeight: 600,
-                  borderBottom: "1px solid #000000"
+                  color: "text.base",
+                  fontWeight: 400,
                 }}
                 >{data.categoria}
                 </TableCell>
 
                 <TableCell align="right" sx={{
-                  // color: Theme.palette.text.base,
-                  fontWeight: 600,
-                  borderBottom: "1px solid #000000"
+                  color: "text.base",
+                  fontWeight: 400,
                 }}
                 >
                   {new Date(data.data).toLocaleDateString("pt-br")}
                 </TableCell>
 
-                <TableCell align="right" sx={{ // Célula que armezana botão para fazer delete
-                  borderBottom: "1px solid #000000"
-                }}>
+                <TableCell align="right">
                   <IconButton onClick={() => handleDelete(data.id)}>
                     <Tooltip title={"Deletar transação"}>
                       <DeleteIcon sx={{ color: "#F75A68" }} />
@@ -134,9 +128,9 @@ export default function Transactions({ transactions }) {
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
                 labelRowsPerPage={"Linhas por página"}
                 sx={{
-                  color: "#FFF",
+                  color: "text.base",
                   fontWeight: 600,
-                  borderBottom: "1px solid #000000",
+                  borderColor: "background.paper",
                   paddingTop: 30,
                 }}
               >
