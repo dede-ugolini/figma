@@ -68,39 +68,58 @@ export default function Transactions({ transactions }) {
 
   return (
     <>
-      <TableContainer component={Paper} sx={{/*  backgroundColor: Theme.palette.secondary.grayThree,  */width: "100%" }}>
-        <Table size={dense ? "small" : "medium"} sx={{ minWidth: '80%' }}>
-
+      <TableContainer component={Paper}>
+        <Table size={dense ? "small" : "medium"} >
 
           <TableBody>
             {transactions.map((data) => (
               <TableRow key={data.id} >
 
-                <TableCell> {/* Célula que armazena o nome da transação*/}
-                  <Typography color="text.base">
+                <TableCell sx={(theme) => ({
+                  background: theme.palette.background.paper,
+                  borderBottom: "5px solid",
+                  borderColor: theme.palette.background.default
+                })}> {/* Célula que armazena o nome da transação*/}
+                  <Typography color="text.base" variant="body1">
                     {data.nome}
                   </Typography>
                 </TableCell>
 
-                <TableCell align="right">
-                  <Typography color={data.tipo === 'saida' ? '#F75A68' : "primary.main"}> {/* Célula que armazena o preço */}
+                <TableCell align="right" sx={(theme) => ({
+                  background: theme.palette.background.paper,
+                  borderBottom: "5px solid",
+                  borderColor: theme.palette.background.default
+                })}> {/* Célula que armazena o preço */}
+                  <Typography color={data.tipo === 'saida' ? '#F75A68' : "primary.main"} variant="body1">
                     R$ {parseFloat(data.valor).toLocaleString("pt-br", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </Typography>
                 </TableCell>
 
-                <TableCell align="right"> {/* Célula que armazena a categoria */}
-                  <Typography color="text.base">
+                <TableCell align="right" sx={(theme) => ({
+                  background: theme.palette.background.paper,
+                  borderBottom: "5px solid",
+                  borderColor: theme.palette.background.default
+                })}> {/* Célula que armazena a categoria */}
+                  <Typography color="text.base" variant="body1">
                     {data.categoria}
                   </Typography>
                 </TableCell>
 
-                <TableCell align="right">
-                  <Typography color="text.base">
+                <TableCell align="right" sx={(theme) => ({
+                  background: theme.palette.background.paper,
+                  borderBottom: "5px solid",
+                  borderColor: theme.palette.background.default
+                })}>
+                  <Typography color="text.base" variant="body1">
                     {new Date(data.data).toLocaleDateString("pt-br")}
                   </Typography>
                 </TableCell>
 
-                <TableCell align="right">
+                <TableCell align="right" sx={(theme) => ({
+                  background: theme.palette.background.paper,
+                  borderBottom: "5px solid",
+                  borderColor: theme.palette.background.default
+                })}>
                   <IconButton onClick={() => handleDelete(data.id)}>
                     <Tooltip title={"Deletar transação"}>
                       <DeleteIcon sx={{ color: "#F75A68" }} />
@@ -122,12 +141,13 @@ export default function Transactions({ transactions }) {
                 onRowsPerPageChange={handleChangeRowsPerPage}
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
                 labelRowsPerPage={"Linhas por página"}
-                sx={{
+                sx={(theme) => ({
                   color: "text.base",
                   fontWeight: 600,
                   borderColor: "background.paper",
                   paddingTop: 30,
-                }}
+                  background: theme.palette.background.paper,
+                })}
               >
               </TablePagination>
             </TableRow>
@@ -137,14 +157,15 @@ export default function Transactions({ transactions }) {
         <FormControlLabel
           label="Agrupar"
           control={<Switch checked={dense} onChange={() => setDense(!dense)} />}
-          sx={{
+          sx={(theme) => ({
+            background: theme.palette.background.paper,
             display: "flex",
             justifyContent: "right"
-          }}
+          })}
         >
         </FormControlLabel>
 
-      </TableContainer>
+      </TableContainer >
 
       <Snackbar // Em caso de erro
         open={openAlert && !success}
