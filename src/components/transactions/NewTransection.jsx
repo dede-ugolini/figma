@@ -8,8 +8,6 @@ import TextField from "@mui/material/TextField";
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 
-// import { Theme } from "../../themes/Theme";
-
 import { useState } from "react";
 import { useTransaction } from "../../context/TransactionContext";
 import { Paper, Typography } from "@mui/material";
@@ -142,8 +140,10 @@ export default function NewTransection() {
         open={open}
         slotProps={{
           paper: {
-            sx: { backgroundColor: "#29292E" }
-          }
+            sx: (theme) => ({
+              backgroundColor: theme.palette.background.header
+            })
+          },
         }}
       >
         <Stack>
@@ -155,53 +155,59 @@ export default function NewTransection() {
             <h4 style={{/*  color: Theme.palette.primary.contrastText  */ }}>Nova Transação</h4>
 
             <TextField // Textfield que coleta o input de descrição
-              component={Paper}
               label={"Descrição"}
               value={description}
               placeholder="Descrição do produto"
               multiline={true}
               onChange={(e) => setDescription(e.target.value)}
-              sx={{
+              sx={(theme) => ({
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: theme.palette.mode === "dark" ? theme.palette.background.header : theme.palette.background.paper
+                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
-              }}
+              })}
             >
             </TextField>
 
             <TextField // Textfield que coleta o input do preço
-              component={Paper}
               label={"Preço"}
               type="number"
               onChange={(e) => setPrice(Number(e.target.value))}
               placeholder="Preço do produto"
-              sx={{
+              sx={(theme) => ({
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: theme.palette.mode === "dark" ? theme.palette.background.header : theme.palette.background.paper
+                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
-              }}
+              })}
             />
 
             <TextField // TextField que coleta o input da categoria
-              component={Paper}
               label={"Categoria"}
               value={category}
               placeholder="Categoria do produto"
               onChange={(e) => setCategory(e.target.value)}
-              sx={{
+              sx={(theme) => ({
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: theme.palette.mode === "dark" ? theme.palette.background.header : theme.palette.background.paper
+                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
-              }}
+              })}
             />
 
             <Stack spacing={1} direction={'row'} sx={{ // Stack que armazena os botões de entradas e saídas
@@ -211,33 +217,33 @@ export default function NewTransection() {
             }}>
               <Button // Botão que define se transação é do tipo entrada
                 onClick={handleClickEntradas}
-                sx={{
+                sx={(theme) => ({
                   width: "50%",
                   borderRadius: "9px",
-                  // backgroundColor: entradaActive ? "primary.main" : Theme.palette.secondary.main,
-                  // color: Theme.palette.primary.contrastText,
+                  backgroundColor: entradaActive ? "primary.light" : "background.paper",
+                  color: "primary.contrastText",
                   ":hover": {
-                    backgroundColor: entradaActive ? "primary.main" : "secondary.light",
+                    backgroundColor: entradaActive ? "primary.main" : "background.paper",
                   },
                   ":active": {
                     backgroundColor: "primary.main"
                   }
-                }}><ArrowCircleUp color={entradaActive ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
+                })}><ArrowCircleUp color={entradaActive ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
 
               <Button // Botão que define se transação é do tipo saída 
                 onClick={handleClickSaidas}
-                sx={{
+                sx={(theme) => ({
                   width: "50%",
                   borderRadius: "9px",
-                  // backgroundColor: saidaActive ? "#AA2834" : Theme.palette.secondary.main,
-                  // color: Theme.palette.primary.contrastText,
+                  backgroundColor: saidaActive ? "#AA2834" : "background.default",
+                  color: "primary.contrastText",
                   ":hover": {
-                    backgroundColor: saidaActive ? "#AA2834" : "secondary.light",
+                    backgroundColor: saidaActive ? "#AA2834" : "background.paper",
                   },
                   ":active": {
                     backgroundColor: "#AA2834",
                   }
-                }}><ArrowCircleDown sx={{ color: saidaActive ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
+                })}><ArrowCircleDown sx={{ color: saidaActive ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
             </Stack>
 
             <Button // Botão que cadatra nova transação
@@ -256,13 +262,10 @@ export default function NewTransection() {
           sx={{
             position: "absolute",
             alignSelf: "flex-end",
-            // color: Theme.palette.text.base,
-            ":hover": {
-              // backgroundColor: Theme.palette.primary.main
-            }
+            color: "text.base",
           }}
         >X</Button>
-      </Dialog>
+      </Dialog >
 
       <Snackbar // Snackbar em caso de falha
         open={openAlert && !success}
