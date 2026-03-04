@@ -68,7 +68,7 @@ export default function Transactions({ transactions }) {
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={(theme) => ({ background: theme.palette.background.paper })}>
         <Table size={dense ? "small" : "medium"} >
 
           <TableBody>
