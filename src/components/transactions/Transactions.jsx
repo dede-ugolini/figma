@@ -192,7 +192,7 @@ export default function Transactions({ transactions }) {
           horizontal: "center",
         }}
       >
-        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>
+        <Alert variant="filled" onClose={() => setOpenAlert(false)} sx={(theme) => ({ background: theme.palette.primary.light, color: "#fff" })}>
           {message}
         </Alert>
       </Snackbar>

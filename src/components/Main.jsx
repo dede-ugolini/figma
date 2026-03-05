@@ -12,7 +12,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 
 export default function Main() {
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   // let theme = responsiveFontSizes(darkMode ? darkTheme : lightTheme);
 
   return (
@@ -36,7 +36,7 @@ export default function Main() {
 
             <Stack spacing={5} sx={{ // Stack que armazena os 3 cards de saldo e a o container que guarda a barra de pesquisa e transações.
               position: 'relative',
-              top: '-5vh',
+              top: '-8vh',
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
