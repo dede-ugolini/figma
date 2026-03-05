@@ -12,8 +12,8 @@ export default function Saldo({ entradas, saidas, total }) {
 
   return (
     <>
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1, sm: 4 }} width={"100%"} height={{ xs: "30vh", sm: "17vh" }}>
-        <Card sx={{ width: "100%" }}>
+      <Stack direction={"row"} spacing={{ xs: 1, sm: 4 }} width={"100%"} height={{ xs: "10vh", sm: "17vh" }} sx={{ overflowX: { xs: "auto", sm: "hidden" } }} >
+        <Card sx={{ minWidth: { xs: "70vw", sm: "auto" }, flex: { sm: 1 } }}>
           <CardContent sx={{ paddingLeft: "10%", paddingTop: { xs: "5%", sm: "10%" }, paddingRight: "10%" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <Typography variant="h6">Entradas</Typography>
@@ -25,7 +25,7 @@ export default function Saldo({ entradas, saidas, total }) {
           </CardActions>
         </Card>
 
-        <Card sx={{ width: "100%" }}>
+        <Card sx={{ minWidth: { xs: "70vw", sm: "auto" }, flex: { sm: 1 } }}>
           <CardContent sx={{ paddingLeft: "10%", paddingTop: { xs: "5%", sm: "10%" }, paddingRight: "10%" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <Typography variant="h6">Saídas</Typography>
@@ -37,7 +37,7 @@ export default function Saldo({ entradas, saidas, total }) {
           </CardActions>
         </Card>
 
-        <Card sx={(theme) => ({ background: theme.palette.mode === "dark" ? theme.palette.primary.dark : theme.palette.primary.main, width: "100%" })}>
+        <Card sx={(theme) => ({ background: theme.palette.mode === "dark" ? theme.palette.primary.dark : theme.palette.primary.main, minWidth: { xs: "70vw", sm: "auto" }, flex: { sm: 1 } })}>
           <CardContent sx={{ paddingLeft: "10%", paddingTop: { xs: "5%", sm: "10%" }, paddingRight: "10%" }}>
             <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
               <Typography variant="h6" sx={{ color: "white" }}>Total</Typography>

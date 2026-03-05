@@ -9,7 +9,7 @@ import Main from './components/Main.jsx'
 import { CssBaseline } from '@mui/material';
 
 
-function App() {
+export default function App() {
 
   const token = localStorage.getItem("token");
 
@@ -22,4 +22,3 @@ function App() {
     </BrowserRouter>
   );
 }
-export default App

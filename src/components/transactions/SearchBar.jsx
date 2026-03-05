@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -40,7 +41,9 @@ export default function SearchBar({ search, setSearch }) {
             }}
           >
             <SearchIcon></SearchIcon>
-            Buscar
+            <Typography sx={{ display: { xs: "none", sm: "flex" } }}>
+              Buscar
+            </Typography>
           </Button>
         </Stack>
 
