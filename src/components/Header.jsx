@@ -17,14 +17,17 @@ export default function Header() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: theme.palette.background.header
+        background: theme.palette.background.header,
+        minHeight: '20vh',
       })}>
         <Box sx={{
           width: '80%',
-          minHeight: '20vh',
           display: "flex",
           justifyContent: "space-between",
-          alignItems: 'center'
+          alignItems: 'center',
+          position: "relative",
+          top: "-3vh"
+
         }}>
           <Stack direction={"row"}>
             <img src={image} alt="Finance" width={180} height={50} />

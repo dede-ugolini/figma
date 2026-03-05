@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
+import { Alert, IconButton, Snackbar, Stack, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
 
 import { useState } from 'react'
 
@@ -68,7 +68,7 @@ export default function Transactions({ transactions }) {
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={(theme) => ({ background: theme.palette.background.paper })}>
         <Table size={dense ? "small" : "medium"} >
 
           <TableBody>
@@ -160,7 +160,9 @@ export default function Transactions({ transactions }) {
           sx={(theme) => ({
             background: theme.palette.background.paper,
             display: "flex",
-            justifyContent: "right"
+            justifyContent: "end",
+            margin: 0,
+            paddingRight: "1%",
           })}
         >
         </FormControlLabel>
@@ -190,7 +192,7 @@ export default function Transactions({ transactions }) {
           horizontal: "center",
         }}
       >
-        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>
+        <Alert variant="filled" onClose={() => setOpenAlert(false)} sx={(theme) => ({ background: theme.palette.primary.light, color: "#fff" })}>
           {message}
         </Alert>
       </Snackbar>

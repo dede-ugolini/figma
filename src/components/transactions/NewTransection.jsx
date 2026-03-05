@@ -8,100 +8,59 @@ import TextField from "@mui/material/TextField";
 import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 
-// import { Theme } from "../../themes/Theme";
-
+import { Typography } from "@mui/material";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTransaction } from "../../context/TransactionContext";
-import { Paper, Typography } from "@mui/material";
 
 import { createTransactions } from "../../service/post/createTransactions";
 
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
 
+  console.log("Render from new transection");
+
   const { open, setOpen, setAddTransaction } = useTransaction();
 
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [type, setType] = useState("");
   const [success, setSuccess] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [message, setMessage] = useState("");
-  const [entradaActive, setEntradaActive] = useState(false);
-  const [saidaActive, setSaidaActive] = useState(false);
 
   function clickToClose() {
+    reset();
     setOpen(false);
   }
 
-  const clearTransaction = () => {
-    //Limpando os campos
-    setDescription("");
-    setPrice(Number(0));
-    setCategory("");
-    setType("");
-    setEntradaActive(false);
-    setSaidaActive(false);
-  }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      description: "",
+      price: 0,
+      category: "",
+      type: "",
+    },
+  });
 
-  async function register() {
+  const type = watch("type");
 
-    if (isNaN(price)) {
-      setMessage("Por favor, digite um número válido!");
-      setSuccess(false);
-      setOpenAlert(true);
-      return;
-    }
+  const onSubmit = async (data) => {
 
-    if (description.length === 0) {
-      setMessage("Descrição não pode estar vazia");
-      setSuccess(false);
-      setOpenAlert(true);
-      return;
-    }
+    const status = createTransactions(
+      data.description, data.price,
+      data.category, data.type);
 
-    if (price === 0) {
-      setMessage("Preço precisa ser maior que zero!");
-      setSuccess(false);
-      setOpenAlert(true);
-      return;
-    }
+    reset();
 
-    if (price < 0) {
-      setMessage("Preço não pode ser valor negativo!");
-      setSuccess(false);
-      setOpenAlert(true);
-      return;
-    }
-
-    if (category.length === 0) {
-      setMessage("Categoria não pode estar vazia!");
-      setSuccess(false);
-      setOpenAlert(true);
-      return;
-    }
-
-    if (type.length === 0) {
-      setMessage("Transação precisa ser saída ou entrada");
-      setSuccess(false);
-      setOpenAlert(true);
-      return;
-    }
-
-    const status = await createTransactions(description, price, category, type);
-
-    if (status === 201) {
+    if (status == 201) {
       setMessage("Transação realizada com sucesso!");
       setSuccess(true);
       setOpenAlert(true);
-
-      clearTransaction();
-
-      // Fecha o dialog
-      setOpen(false);
-
-      // Manda flag para o useEffect faz get das transações re-render da tabela de transações
       setAddTransaction(true);
     }
 
@@ -122,18 +81,12 @@ export default function NewTransection() {
       setSuccess(false);
       setOpenAlert(true);
     }
-  }
 
-  const handleClickEntradas = () => {
-    setType("entrada");
-    setEntradaActive(true);
-    setSaidaActive(false);
-  }
-
-  const handleClickSaidas = () => {
-    setType("saida");
-    setEntradaActive(false);
-    setSaidaActive(true);
+    else {
+      setMessage("Algum erro ocorreu, tente novamente mais tarde");
+      setSuccess(false);
+      setOpenAlert(true);
+    }
   }
 
   return (
@@ -142,11 +95,13 @@ export default function NewTransection() {
         open={open}
         slotProps={{
           paper: {
-            sx: { backgroundColor: "#29292E" }
-          }
+            sx: (theme) => ({
+              backgroundColor: theme.palette.background.header
+            })
+          },
         }}
       >
-        <Stack>
+        <Stack component={"form"} onSubmit={handleSubmit(data => onSubmit(data))}>
           <Stack spacing={2} sx={{
             margin: "20px",
             width: "350px",
@@ -155,53 +110,63 @@ export default function NewTransection() {
             <h4 style={{/*  color: Theme.palette.primary.contrastText  */ }}>Nova Transação</h4>
 
             <TextField // Textfield que coleta o input de descrição
-              component={Paper}
+              {...register("description", { required: "This field is required" })}
+              helperText={errors.description?.message}
+              error={!!errors.description}
               label={"Descrição"}
-              value={description}
               placeholder="Descrição do produto"
               multiline={true}
-              onChange={(e) => setDescription(e.target.value)}
-              sx={{
+              sx={(theme) => ({
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: theme.palette.mode === "dark" ? theme.palette.background.header : theme.palette.background.paper
+                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
-              }}
+              })}
             >
             </TextField>
 
             <TextField // Textfield que coleta o input do preço
-              component={Paper}
+              {...register("price", { required: "This field is required" })}
+              helperText={errors.price?.message}
+              error={!!errors.price}
               label={"Preço"}
               type="number"
-              onChange={(e) => setPrice(Number(e.target.value))}
               placeholder="Preço do produto"
-              sx={{
+              sx={(theme) => ({
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: theme.palette.mode === "dark" ? theme.palette.background.header : theme.palette.background.paper
+                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
-              }}
+              })}
             />
 
             <TextField // TextField que coleta o input da categoria
-              component={Paper}
+              {...register("category", { required: "This field is required" })}
+              helperText={errors.category?.message}
+              error={!!errors.category}
               label={"Categoria"}
-              value={category}
               placeholder="Categoria do produto"
-              onChange={(e) => setCategory(e.target.value)}
-              sx={{
+              sx={(theme) => ({
+                '& .MuiOutlinedInput-root': {
+                  backgroundColor: theme.palette.mode === "dark" ? theme.palette.background.header : theme.palette.background.paper
+                },
                 '& .MuiInputLabel-root': { // Cor do label do TextField
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
                 '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                  // color: Theme.palette.text.base,
+                  color: theme.palette.text.base,
                 },
-              }}
+              })}
             />
 
             <Stack spacing={1} direction={'row'} sx={{ // Stack que armazena os botões de entradas e saídas
@@ -210,40 +175,40 @@ export default function NewTransection() {
               justifyContent: 'center'
             }}>
               <Button // Botão que define se transação é do tipo entrada
-                onClick={handleClickEntradas}
-                sx={{
+                onClick={() => setValue("type", "entrada")}
+                sx={(theme) => ({
                   width: "50%",
                   borderRadius: "9px",
-                  // backgroundColor: entradaActive ? "primary.main" : Theme.palette.secondary.main,
-                  // color: Theme.palette.primary.contrastText,
+                  backgroundColor: type === "entrada" ? "primary.light" : "background.paper",
+                  color: "primary.contrastText",
                   ":hover": {
-                    backgroundColor: entradaActive ? "primary.main" : "secondary.light",
+                    backgroundColor: type === "entrada" ? "primary.main" : "background.paper",
                   },
                   ":active": {
                     backgroundColor: "primary.main"
                   }
-                }}><ArrowCircleUp color={entradaActive ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
+                })}><ArrowCircleUp color={type === "entrada" ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
 
               <Button // Botão que define se transação é do tipo saída 
-                onClick={handleClickSaidas}
-                sx={{
+                onClick={() => setValue("type", "saida")}
+                sx={(theme) => ({
                   width: "50%",
                   borderRadius: "9px",
-                  // backgroundColor: saidaActive ? "#AA2834" : Theme.palette.secondary.main,
-                  // color: Theme.palette.primary.contrastText,
+                  backgroundColor: type === "saida" ? "#AA2834" : "background.default",
+                  color: "primary.contrastText",
                   ":hover": {
-                    backgroundColor: saidaActive ? "#AA2834" : "secondary.light",
+                    backgroundColor: type === "saida" ? "#AA2834" : "background.paper",
                   },
                   ":active": {
                     backgroundColor: "#AA2834",
                   }
-                }}><ArrowCircleDown sx={{ color: saidaActive ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
+                })}><ArrowCircleDown sx={{ color: type === "saida" ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
             </Stack>
 
-            <Button // Botão que cadatra nova transação
-              onClick={register} variant="contained" sx={{
-                textTransform: "none",
-              }}>
+            <Button // Botão que cadastra nova transação
+              type="submit"
+              variant="contained"
+            >
               <Typography>Cadastrar</Typography>
             </Button>
 
@@ -256,13 +221,10 @@ export default function NewTransection() {
           sx={{
             position: "absolute",
             alignSelf: "flex-end",
-            // color: Theme.palette.text.base,
-            ":hover": {
-              // backgroundColor: Theme.palette.primary.main
-            }
+            color: "text.base",
           }}
         >X</Button>
-      </Dialog>
+      </Dialog >
 
       <Snackbar // Snackbar em caso de falha
         open={openAlert && !success}

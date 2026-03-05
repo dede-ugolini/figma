@@ -1,5 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
+const theme = createTheme();
+
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -43,6 +45,27 @@ export const lightTheme = createTheme({
 
     fontWeightRegular: 400,
     fontWeightBold: 700,
+
+    h4: {
+      [theme.breakpoints.up('xs')]: {
+        fontSize: "1.3rem",
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: "2rem",
+      },
+      [theme.breakpoints.up('xl')]: {
+        fontSize: "2.5rem",
+      },
+    },
+
+    h6: {
+      [theme.breakpoints.up('xs')]: {
+        fontSize: "1rem",
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: "1.5rem",
+      },
+    },
 
     body1: {
       fontSize: '16px',
@@ -128,6 +151,26 @@ export const darkTheme = createTheme({
       lineHeight: 1.6,
     },
 
+    h4: {
+      [theme.breakpoints.up('xs')]: {
+        fontSize: "1.3rem",
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: "2rem",
+      },
+      [theme.breakpoints.up('xl')]: {
+        fontSize: "2.5rem",
+      },
+    },
+
+    h6: {
+      [theme.breakpoints.up('xs')]: {
+        fontSize: "1rem",
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: "1.5rem",
+      },
+    },
     h1: {
       fontSize: "16px", // xs (default)
 

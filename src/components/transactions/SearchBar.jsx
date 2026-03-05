@@ -3,37 +3,29 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
 import SearchIcon from '@mui/icons-material/Search';
-// import { Theme } from '../../themes/Theme';
-import { Paper } from "@mui/material";
 
 export default function SearchBar({ search, setSearch }) {
 
   return (
 
     <>
-      <Stack direction='collumn' sx={{
-        width: "100%",
-      }}>
-        <Stack sx={{
-          width: "80%",
-          paddingRight: "1%",
-        }}>
-          <TextField
-            label={"Busque uma Transação"}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            variant="filled"
-            sx={(theme) => ({
-              '& .MuiInputLabel-root': { // Cor do label do TextField
-                color: "text.base",
-              },
-              '& .MuiInputBase-input': { // Cor do texto de input do usuário
-                color: "text.base",
-              },
-              background: theme.palette.background
-            })}>
-          </TextField>
-        </Stack>
+      <Stack direction='collumn' width={"100%"}>
+        <TextField
+          label={"Busque uma Transação"}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          variant="filled"
+          sx={{
+            '& .MuiInputLabel-root': { // Cor do label do TextField
+              color: "text.base",
+            },
+            '& .MuiInputBase-input': { // Cor do texto de input do usuário
+              color: "text.base",
+            },
+            width: "100%",
+            paddingRight: { xs: "5%", sm: "1%" }
+          }}>
+        </TextField>
         <Stack sx={{
           width: "20%"
         }}>
