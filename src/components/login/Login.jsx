@@ -1,34 +1,26 @@
 import { Navigate } from 'react-router-dom';
 
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import Alert from "@mui/material/Alert";
 import AlertTitle from '@mui/material/AlertTitle';
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import { CssBaseline, Paper, ThemeProvider } from '@mui/material';
-
-import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-
+import useLogin from '../../hooks/useLogin.js';
+import { darkTheme } from "../../themes/Theme.jsx";
 import Register from './Register.jsx';
 
-import { login } from '../../service/post/login.js';
-
-import { darkTheme } from "../../themes/Theme.jsx"
 
 export default function Login() {
 
-  const [logged, setLogged] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [message, setMessage] = useState('');
+  const { open, logged, success, message, handleLogin } = useLogin();
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   }
     = useForm({
@@ -36,42 +28,6 @@ export default function Login() {
         user: "", password: ""
       }
     });
-
-  const onSubmit = async (data) => {
-
-    const status = await login(data.user, data.password);
-
-    if (status === 200) {
-      setMessage("Login bem sucedido!")
-      setOpen(true);
-      setSuccess(true);
-      setTimeout(() => {
-        setLogged(true);
-      }, 1000);
-    }
-
-    else if (status === 401) {
-      setMessage("Credenciais inválidas!");
-      setLogged(false)
-      setOpen(true);
-      setSuccess(false);
-    }
-
-    else if (status === 500) {
-      setMessage("Erro de servidor!");
-      setLogged(false)
-      setOpen(true);
-      setSuccess(false);
-    }
-
-    else {
-      setMessage("Algum erro ocorreu, tente novamente mais tarde!");
-      setLogged(false);
-      setOpen(true);
-      setSuccess(false);
-    }
-    reset();
-  }
 
   if (logged) {
     return <Navigate to={"/home"} />
@@ -88,7 +44,7 @@ export default function Login() {
         alignItems: 'center',
       }}
       >
-        <Stack component={"form"} p={5} bgcolor={"background.paper"} onSubmit={handleSubmit(data => onSubmit(data))} sx={{
+        <Stack component={"form"} p={5} bgcolor={"background.paper"} onSubmit={handleSubmit(data => handleLogin(data.user, data.password))} sx={{
           alignItems: 'center',
         }}>
           <Stack>
@@ -162,5 +118,4 @@ export default function Login() {
     </ThemeProvider>
 
   )
-
 }
