@@ -7,8 +7,6 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
 
-import { useState } from 'react'
-
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useTransaction } from "../../context/TransactionContext";
@@ -22,9 +20,8 @@ export default function Transactions({ transactions }) {
 
   const { openAlert, message, success, handleDelete, handleCloseAlert } = useDelete();
 
-  const { handleChangePage, handleChangeRowsPerPage } = useNewTransaction();
+  const { handleChangePage, handleChangeRowsPerPage, dense, handleDense } = useNewTransaction();
 
-  const [dense, setDense] = useState(false);
 
   return (
     <>
@@ -116,7 +113,7 @@ export default function Transactions({ transactions }) {
 
         <FormControlLabel
           label="Agrupar"
-          control={<Switch checked={dense} onChange={() => setDense(!dense)} />}
+          control={<Switch checked={dense} onChange={handleDense} />}
           sx={(theme) => ({
             background: theme.palette.background.paper,
             display: "flex",

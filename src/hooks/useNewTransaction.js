@@ -7,6 +7,7 @@ export default function useNewTransaction() {
   const [success, setSuccess] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [message, setMessage] = useState("");
+  const [dense, setDense] = useState(false);
 
   const { setPage, setRowsPerPage, setAddTransaction } = useTransaction();
 
@@ -25,6 +26,10 @@ export default function useNewTransaction() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  }
+
+  const handleDense = () => {
+    setDense(!dense);
   }
 
   const handleNewTransaction = async (description, price, category, type) => {
@@ -67,10 +72,12 @@ export default function useNewTransaction() {
     success,
     openAlert,
     message,
+    dense,
     handleNewTransaction,
     handleCloseAlert,
     handleOpenAlert,
     handleChangePage,
-    handleChangeRowsPerPage
+    handleChangeRowsPerPage,
+    handleDense,
   };
 }
