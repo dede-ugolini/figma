@@ -48,5 +48,13 @@ export default function useRegister() {
     }
   }
 
-  return { open, success, openAlert, message, handleRegister, handleClickClose, handleClickOpen };
+  return {
+    open,
+    success,
+    openAlert,
+    message,
+    handleRegister,
+    handleClickClose,
+    handleClickOpen
+  };
 }

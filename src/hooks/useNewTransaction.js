@@ -63,5 +63,14 @@ export default function useNewTransaction() {
     }
 
   }
-  return { success, openAlert, message, handleNewTransaction, handleCloseAlert, handleOpenAlert, handleChangePage, handleChangeRowsPerPage };
+  return {
+    success,
+    openAlert,
+    message,
+    handleNewTransaction,
+    handleCloseAlert,
+    handleOpenAlert,
+    handleChangePage,
+    handleChangeRowsPerPage
+  };
 }

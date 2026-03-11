@@ -51,5 +51,12 @@ export default function useDelete() {
     }
   }
 
-  return { openAlert, message, success, handleDelete, handleCloseAlert, handleOpenAlert };
+  return {
+    openAlert,
+    message,
+    success,
+    handleDelete,
+    handleCloseAlert,
+    handleOpenAlert,
+  };
 }
