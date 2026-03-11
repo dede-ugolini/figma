@@ -7,21 +7,19 @@ import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
-import { useState } from 'react';
-
-import { createUser } from "../../service/post/createUser.js";
-import { Paper } from "@mui/material";
+import useRegister from "../../hooks/useRegister.js"
 
 import { useForm } from "react-hook-form";
 
 export default function Register() {
+
+  const { open, success, openAlert, message, handleRegister, handleClickOpen, handleClickClose } = useRegister();
 
   console.log("render");
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -30,49 +28,6 @@ export default function Register() {
     }
   });
 
-  const [open, setOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  }
-  const handleClickClose = () => {
-    setOpen(false);
-  }
-
-  const onSubmit = async (data) => {
-    const status = await createUser(data);
-
-    if (status == 201) {
-      setMessage("Usuário cadastrado com sucesso!");
-      setOpenAlert(true);
-      setSuccess(true);
-      setTimeout(() => {
-        setOpen(false);
-      }, 500);
-    }
-
-    else if (status == 400) {
-      setMessage("Usuário existente");
-      setOpenAlert(true);
-      setSuccess(false);
-    }
-
-    else if (status == 500) {
-      setMessage(" Erro interno de servidor, tente novamente mais tarde");
-      setOpenAlert(true);
-      setSuccess(false);
-    }
-
-    else {
-      setMessage("Algum erro ocorreu, tente novamente mais tarde");
-      setOpenAlert(true);
-      setSuccess(false);
-    }
-    reset();
-  }
 
   return (
     <>
@@ -86,7 +41,7 @@ export default function Register() {
           backgroundColor: theme.palette.background.paper
         }
       })}>
-        <Stack spacing={2} component="form" onSubmit={handleSubmit(data => onSubmit(data))} sx={{
+        <Stack spacing={2} component="form" onSubmit={handleSubmit(data => handleRegister(data.user, data.password))} sx={{
           margin: "20px",
           width: '450px',
           height: "450px",
@@ -182,13 +137,13 @@ export default function Register() {
       <Snackbar // Snackbar em caso de erro
         open={openAlert && !success}
         autoHideDuration={5000}
-        onClose={() => setOpenAlert(false)}
+        onClose={handleClickClose}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
         }}
       >
-        <Alert severity="error" variant="filled" onClose={() => setOpenAlert(false)}>
+        <Alert severity="error" variant="filled" onClose={handleClickClose}>
           {message}
         </Alert>
       </Snackbar>
@@ -196,13 +151,13 @@ export default function Register() {
       <Snackbar // Snackbar em caso de sucesso 
         open={openAlert && success}
         autoHideDuration={5000}
-        onClose={() => setOpenAlert(false)}
+        onClose={handleClickClose}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
         }}
       >
-        <Alert variant="filled" severity="success" onClose={() => setOpenAlert(false)}>
+        <Alert variant="filled" severity="success" onClose={handleClickClose}>
           {message}
         </Alert>
       </Snackbar>
