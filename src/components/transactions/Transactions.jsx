@@ -13,24 +13,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useTransaction } from "../../context/TransactionContext";
 import useDelete from "../../hooks/useDelete";
+import useNewTransaction from "../../hooks/useNewTransaction";
 
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const { page, setPage, rowsPerPage, setRowsPerPage, totalPages } = useTransaction();
+  const { page, rowsPerPage, totalPages } = useTransaction();
 
   const { openAlert, message, success, handleDelete, handleCloseAlert } = useDelete();
 
+  const { handleChangePage, handleChangeRowsPerPage } = useNewTransaction();
+
   const [dense, setDense] = useState(false);
-
-  const handleChangePage = (newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  }
 
   return (
     <>
