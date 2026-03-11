@@ -17,9 +17,14 @@ import useNewTransaction from "../../hooks/useNewTransaction.js"
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
 
-  console.log("Render from new transection");
 
-  const { success, openAlert, message, handleNewTransaction, handleCloseAlert } = useNewTransaction();
+  const {
+    success,
+    openAlert,
+    message,
+    handleNewTransaction,
+    handleCloseAlert,
+  } = useNewTransaction();
 
   const { open, setOpen } = useTransaction();
 

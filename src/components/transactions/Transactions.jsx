@@ -16,12 +16,26 @@ import useNewTransaction from "../../hooks/useNewTransaction";
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const { page, rowsPerPage, totalPages } = useTransaction();
+  const {
+    page,
+    rowsPerPage,
+    totalPages,
+  } = useTransaction();
 
-  const { openAlert, message, success, handleDelete, handleCloseAlert } = useDelete();
+  const {
+    openAlert,
+    message,
+    success,
+    handleDelete,
+    handleCloseAlert
+  } = useDelete();
 
-  const { handleChangePage, handleChangeRowsPerPage, dense, handleDense } = useNewTransaction();
-
+  const {
+    handleChangePage,
+    handleChangeRowsPerPage,
+    dense,
+    handleDense }
+    = useNewTransaction();
 
   return (
     <>
