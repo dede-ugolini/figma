@@ -3,18 +3,37 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
+import { useForm } from "react-hook-form";
+
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function SearchBar({ search, setSearch }) {
+export default function SearchBar({ setSearch }) {
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+  } = useForm({
+    defaultValues: { search: "" }
+  });
+
+  const onSubmit = (search) => {
+    setSearch(search)
+    reset();
+  }
 
   return (
 
     <>
-      <Stack direction='collumn' width={"100%"}>
+      <Stack
+        direction='collumn'
+        width={"100%"}
+        component={"form"}
+        onSubmit={handleSubmit(data => onSubmit(data.search))}
+      >
         <TextField
+          {...register("search")}
           label={"Busque uma Transação"}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
           variant="filled"
           sx={{
             '& .MuiInputLabel-root': { // Cor do label do TextField
@@ -31,6 +50,7 @@ export default function SearchBar({ search, setSearch }) {
           width: "20%"
         }}>
           <Button
+            type="submit"
             variant="outlined"
             sx={{
               height: "100%",

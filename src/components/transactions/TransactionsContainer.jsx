@@ -16,7 +16,7 @@ export default function TransactionsContainer() {
   return (
     <>
       <Saldo entradas={entradas} saidas={saidas} total={entradas - saidas} />
-      <SearchBar search={search} setSearch={setSearch} />
+      <SearchBar setSearch={setSearch} />
       <Stack sx={{ width: "100%" }}>
         <Transactions transactions={filteredSearch} />
       </Stack>
