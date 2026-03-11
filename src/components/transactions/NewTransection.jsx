@@ -9,22 +9,19 @@ import ArrowCircleDown from "@mui/icons-material/ArrowCircleDown";
 import ArrowCircleUp from "@mui/icons-material/ArrowCircleUp";
 
 import { Typography } from "@mui/material";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTransaction } from "../../context/TransactionContext";
 
-import { createTransactions } from "../../service/post/createTransactions";
+import useNewTransaction from "../../hooks/useNewTransaction.js"
 
 // TODO: Adicionar Click-Away Listener para fechar o Dialog sem precisar clicar no botão de fechar
 export default function NewTransection() {
 
   console.log("Render from new transection");
 
-  const { open, setOpen, setAddTransaction } = useTransaction();
+  const { success, openAlert, message, handleNewTransaction, handleCloseAlert } = useNewTransaction();
 
-  const [success, setSuccess] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
-  const [message, setMessage] = useState("");
+  const { open, setOpen } = useTransaction();
 
   function clickToClose() {
     reset();
@@ -49,46 +46,6 @@ export default function NewTransection() {
 
   const type = watch("type");
 
-  const onSubmit = async (data) => {
-
-    const status = createTransactions(
-      data.description, data.price,
-      data.category, data.type);
-
-    reset();
-
-    if (status == 201) {
-      setMessage("Transação realizada com sucesso!");
-      setSuccess(true);
-      setOpenAlert(true);
-      setAddTransaction(true);
-    }
-
-    else if (status === 400) {
-      setMessage("Dados inválidos");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-
-    else if (status === 401) {
-      setMessage("Não autorizado");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-
-    else if (status === 500) {
-      setMessage("Erro interno de servidor!");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-
-    else {
-      setMessage("Algum erro ocorreu, tente novamente mais tarde");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-  }
-
   return (
     <>
       <Dialog
@@ -101,13 +58,13 @@ export default function NewTransection() {
           },
         }}
       >
-        <Stack component={"form"} onSubmit={handleSubmit(data => onSubmit(data))}>
+        <Stack component={"form"} onSubmit={handleSubmit(data => handleNewTransaction(data.description, data.price, data.category, data.type))}>
           <Stack spacing={2} sx={{
             margin: "20px",
             width: "350px",
             height: "450px"
           }}>
-            <h4 style={{/*  color: Theme.palette.primary.contrastText  */ }}>Nova Transação</h4>
+            <h4>Nova Transação</h4>
 
             <TextField // Textfield que coleta o input de descrição
               {...register("description", { required: "This field is required" })}
@@ -176,7 +133,7 @@ export default function NewTransection() {
             }}>
               <Button // Botão que define se transação é do tipo entrada
                 onClick={() => setValue("type", "entrada")}
-                sx={(theme) => ({
+                sx={{
                   width: "50%",
                   borderRadius: "9px",
                   backgroundColor: type === "entrada" ? "primary.light" : "background.paper",
@@ -187,11 +144,11 @@ export default function NewTransection() {
                   ":active": {
                     backgroundColor: "primary.main"
                   }
-                })}><ArrowCircleUp color={type === "entrada" ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
+                }}><ArrowCircleUp color={type === "entrada" ? "#FFF" : "success"}></ArrowCircleUp>Entrada</Button>
 
               <Button // Botão que define se transação é do tipo saída 
                 onClick={() => setValue("type", "saida")}
-                sx={(theme) => ({
+                sx={{
                   width: "50%",
                   borderRadius: "9px",
                   backgroundColor: type === "saida" ? "#AA2834" : "background.default",
@@ -202,7 +159,7 @@ export default function NewTransection() {
                   ":active": {
                     backgroundColor: "#AA2834",
                   }
-                })}><ArrowCircleDown sx={{ color: type === "saida" ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
+                }}><ArrowCircleDown sx={{ color: type === "saida" ? "FFFFFF" : '#F75A68' }}></ArrowCircleDown>Saída</Button>
             </Stack>
 
             <Button // Botão que cadastra nova transação
@@ -229,25 +186,25 @@ export default function NewTransection() {
       <Snackbar // Snackbar em caso de falha
         open={openAlert && !success}
         autoHideDuration={2000}
-        onClose={() => setOpenAlert(false)}
+        onClose={handleCloseAlert}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
         }}
       >
-        <Alert severity="error" variant="filled" onClose={() => setOpenAlert(false)}>{message}</Alert>
+        <Alert severity="error" variant="filled" onClose={handleCloseAlert}>{message}</Alert>
       </Snackbar>
 
       <Snackbar // Snackbar em caso de sucesso
         open={openAlert && success}
         autoHideDuration={2000}
-        onClose={() => setOpenAlert(false)}
+        onClose={handleCloseAlert}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center"
         }}
       >
-        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>{message}</Alert>
+        <Alert severity="success" variant="filled" onClose={handleCloseAlert}>{message}</Alert>
       </Snackbar>
     </>
   )

@@ -43,5 +43,11 @@ export default function useLogin() {
     }
   }
 
-  return { open, logged, success, message, handleLogin };
+  return {
+    open,
+    logged,
+    success,
+    message,
+    handleLogin
+  };
 }

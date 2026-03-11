@@ -3,17 +3,15 @@ import Stack from '@mui/material/Stack'
 import Header from './Header.jsx'
 import { TransactionProvider } from '../context/TransactionContext.jsx'
 import TransactionContainer from './transactions/TransactionsContainer.jsx'
-import { Button, Paper, ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material'
 import Footer from './Footer.jsx'
 import { darkTheme, lightTheme } from '../themes/Theme.jsx'
-import { responsiveFontSizes } from '@mui/material/styles'
 import { useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline'
 
 export default function Main() {
 
   const [darkMode, setDarkMode] = useState(true);
-  // let theme = responsiveFontSizes(darkMode ? darkTheme : lightTheme);
 
   return (
     <>

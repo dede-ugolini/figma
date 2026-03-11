@@ -5,66 +5,26 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Stack, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
+import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
 
 import { useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useTransaction } from "../../context/TransactionContext";
-import { deleteTransactions } from "../../service/delete/deleteTransactions";
+import useDelete from "../../hooks/useDelete";
+import useNewTransaction from "../../hooks/useNewTransaction";
 
 //TODO: Adicionar sorting
 export default function Transactions({ transactions }) {
 
-  const { page, setPage, rowsPerPage, setRowsPerPage, totalPages, setAddTransaction } = useTransaction();
+  const { page, rowsPerPage, totalPages } = useTransaction();
 
-  const [openAlert, setOpenAlert] = useState(false);
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
+  const { openAlert, message, success, handleDelete, handleCloseAlert } = useDelete();
+
+  const { handleChangePage, handleChangeRowsPerPage } = useNewTransaction();
+
   const [dense, setDense] = useState(false);
-
-  const handleChangePage = (newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  }
-
-  const handleDelete = async (id) => {
-    const status = await deleteTransactions(id);
-
-    if (status === 200) {
-      setMessage("Transação deletada com sucesso!");
-      setSuccess(true);
-      setOpenAlert(true);
-      setAddTransaction(true);
-
-      setAddTransaction(true);
-    }
-    else if (status === 401) {
-      setMessage("Não autorizado!");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-    else if (status === 404) {
-      setMessage("Transação não encontrada!");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-    else if (status === 500) {
-      setMessage("Erro interno de servidor, tente novamente mais tarde");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-    else {
-      setMessage("Algum erro ocorreu, tente novamente mais tarde!");
-      setSuccess(false);
-      setOpenAlert(true);
-    }
-  }
 
   return (
     <>
@@ -172,13 +132,13 @@ export default function Transactions({ transactions }) {
       <Snackbar // Em caso de erro
         open={openAlert && !success}
         autoHideDuration={2000}
-        onClose={() => setOpenAlert(false)}
+        onClose={handleCloseAlert}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",
         }}
       >
-        <Alert severity="success" variant="filled" onClose={() => setOpenAlert(false)}>
+        <Alert severity="success" variant="filled" onClose={handleCloseAlert}>
           {message}
         </Alert>
       </Snackbar>
@@ -186,13 +146,13 @@ export default function Transactions({ transactions }) {
       <Snackbar // Em caso de sucesso
         open={openAlert && success}
         autoHideDuration={2000}
-        onClose={() => setOpenAlert(false)}
+        onClose={handleCloseAlert}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",
         }}
       >
-        <Alert variant="filled" onClose={() => setOpenAlert(false)} sx={(theme) => ({ background: theme.palette.primary.light, color: "#fff" })}>
+        <Alert variant="filled" onClose={handleCloseAlert} sx={(theme) => ({ background: theme.palette.primary.light, color: "#fff" })}>
           {message}
         </Alert>
       </Snackbar>
