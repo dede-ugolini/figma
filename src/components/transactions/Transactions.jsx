@@ -44,10 +44,9 @@ export default function Transactions({ transactions }) {
 
           <TableBody>
             {transactions.map((data) => (
-              <TableRow key={data.id} >
+              <TableRow hover key={data.id}>
 
                 <TableCell sx={(theme) => ({
-                  background: theme.palette.background.paper,
                   borderBottom: "5px solid",
                   borderColor: theme.palette.background.default
                 })}> {/* Célula que armazena o nome da transação*/}
@@ -57,7 +56,6 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={(theme) => ({
-                  background: theme.palette.background.paper,
                   borderBottom: "5px solid",
                   borderColor: theme.palette.background.default
                 })}> {/* Célula que armazena o preço */}
@@ -67,7 +65,6 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={(theme) => ({
-                  background: theme.palette.background.paper,
                   borderBottom: "5px solid",
                   borderColor: theme.palette.background.default
                 })}> {/* Célula que armazena a categoria */}
@@ -77,7 +74,6 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={(theme) => ({
-                  background: theme.palette.background.paper,
                   borderBottom: "5px solid",
                   borderColor: theme.palette.background.default
                 })}>
@@ -87,7 +83,6 @@ export default function Transactions({ transactions }) {
                 </TableCell>
 
                 <TableCell align="right" sx={(theme) => ({
-                  background: theme.palette.background.paper,
                   borderBottom: "5px solid",
                   borderColor: theme.palette.background.default
                 })}>
