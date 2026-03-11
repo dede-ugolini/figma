@@ -16,7 +16,14 @@ import Register from './Register.jsx';
 
 export default function Login() {
 
-  const { open, logged, success, message, handleLogin } = useLogin();
+  const {
+    open,
+    logged,
+    success,
+    message,
+    handleLogin,
+    handleCloseAlert
+  } = useLogin();
 
   const {
     register,
@@ -88,13 +95,13 @@ export default function Login() {
         <Snackbar // Snackbar em caso de falha de login
           open={open && !success}
           autoHideDuration={6000}
-          onClose={() => setOpen(false)}
+          onClose={handleCloseAlert}
           anchorOrigin={{
             vertical: "top",
             horizontal: "center"
           }}
         >
-          <Alert variant='filled' severity='error' onClose={() => setOpen(false)}>
+          <Alert variant='filled' severity='error' onClose={handleCloseAlert}>
             <AlertTitle>Atenção!</AlertTitle>
             {message}
           </Alert>
@@ -103,13 +110,13 @@ export default function Login() {
         <Snackbar // Snackbar em caso de sucesso de login
           open={open && success}
           autoHideDuration={6000}
-          onClose={() => setOpen(false)}
+          onClose={handleCloseAlert}
           anchorOrigin={{
             vertical: "top",
             horizontal: "center"
           }}
         >
-          <Alert variant='filled' severity='success' onClose={() => setOpen(false)}>
+          <Alert variant='filled' severity='success' onClose={handleCloseAlert}>
             <AlertTitle>Bem vindo!</AlertTitle>
             {message}
           </Alert>

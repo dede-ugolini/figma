@@ -9,7 +9,16 @@ export default function useLogin() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState('');
 
+  const handleCloseAlert = () => {
+    setOpen(false);
+  }
+
+  const handleOpenAlert = () => {
+    setOpen(true);
+  }
+
   const handleLogin = async (user, password) => {
+
     const status = await login(user, password);
 
     if (status === 200) {
@@ -48,6 +57,8 @@ export default function useLogin() {
     logged,
     success,
     message,
-    handleLogin
+    handleLogin,
+    handleCloseAlert,
+    handleOpenAlert,
   };
 }
