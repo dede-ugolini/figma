@@ -5,16 +5,44 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Alert, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
+
+import CustomTableHead from "./CustomTableHead.jsx"
+
+import { Alert, Box, IconButton, Snackbar, Tooltip, FormControlLabel, Switch, Paper, Typography } from "@mui/material";
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useTransaction } from "../../context/TransactionContext";
 import useDelete from "../../hooks/useDelete";
 import useNewTransaction from "../../hooks/useNewTransaction";
+import { useMemo, useState } from "react";
 
-//TODO: Adicionar sorting
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
 export default function Transactions({ transactions }) {
+
+  const [order, setOrder] = useState("desc");
+  const [orderBy, setOrderBy] = useState("data");
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  }
 
   const {
     page,
@@ -37,13 +65,26 @@ export default function Transactions({ transactions }) {
     handleDense }
     = useNewTransaction();
 
+  const sortedRows = useMemo(
+    () =>
+      transactions
+        .sort(getComparator(order, orderBy))
+    , [order, orderBy, page, rowsPerPage, transactions]
+  );
+
   return (
     <>
       <TableContainer component={Paper} sx={(theme) => ({ background: theme.palette.background.paper })}>
         <Table size={dense ? "small" : "medium"} >
 
+          <CustomTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+          />
+
           <TableBody>
-            {transactions.map((data) => (
+            {sortedRows.map((data) => (
               <TableRow hover key={data.id}>
 
                 <TableCell sx={(theme) => ({

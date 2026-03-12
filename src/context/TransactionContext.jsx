@@ -30,9 +30,6 @@ export function TransactionProvider({ children }) {
         }
       });
     }
-    else {
-      console.log("Transacations is:" + typeof transactions);
-    }
 
     return { entradas, saidas }
   }, [transactions])
@@ -43,18 +40,12 @@ export function TransactionProvider({ children }) {
       if (fetchedTransactions !== undefined) {
         setTransactions(fetchedTransactions);
       }
-      else {
-        console.log("fetchedTransactions is: " + typeof fetchedTransactions);
-      }
     }
 
     async function fetchTotalPages() {
       const fetchedTotalPages = await getTotalPages();
       if (fetchedTotalPages !== undefined) {
         setTotalPages(fetchedTotalPages);
-      }
-      else {
-        console.log("fetchTotalPages is: " + typeof fetchedTotalPages)
       }
     }
 
