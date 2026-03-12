@@ -19,7 +19,7 @@ export default function useNewTransaction() {
     setOpenAlert(true);
   }
 
-  const handleChangePage = (newPage) => {
+  const handleChangePage = (_event, newPage) => {
     setPage(parseInt(newPage));
   }
 

@@ -6,7 +6,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 export default function Footer({ setDark }) {
   return (
     <>
-      <Stack width={"80%"} direction={"row-reverse"}>
+      <Stack width={"80%"} direction={"row-reverse"} sx={{ position: "relative", top: "-5vh" }}>
 
         <IconButton onClick={() => setDark(true)}>
           <DarkModeIcon />
