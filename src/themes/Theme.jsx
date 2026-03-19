@@ -38,6 +38,20 @@ export const lightTheme = createTheme({
         },
       },
     },
+    MuiCssBaseline: {
+      styleOverrides: {
+        '*': {
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#02d999 #dbeafe',
+        },
+        '*::-webkit-scrollbar': {
+          width: '10px',
+        },
+        '*::-webkit-scrollbar-thumb': {
+          backgroundColor: '#3b82f6',
+        },
+      },
+    },
   },
 
   typography: {
@@ -130,6 +144,20 @@ export const darkTheme = createTheme({
           ":hover": {
             background: "#00B37E",
           }
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        '*': {
+          scrollbarWidth: 'thin',
+          scrollbarColor: '#00875F #dbeafe',
+        },
+        '*::-webkit-scrollbar': {
+          width: '10px',
+        },
+        '*::-webkit-scrollbar-thumb': {
+          backgroundColor: '#3b82f6',
         },
       },
     },
